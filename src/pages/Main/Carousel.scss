@@ -1,0 +1,31 @@
+@import '../../styles/variable.scss';
+
+.Carousel {
+  height: 800px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .carousel-container {
+    display: flex;
+    justify-content: left;
+    transition: all ease 0.5s;
+
+    .main-pic {
+      width: 100vw;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .carousel-prev-btn {
+    background-color: $black-color;
+    opacity: 0.1;
+    position: absolute;
+    top: 0px;
+    width: 60px;
+    height: 895px;
+    border: none;
+    cursor: pointer;
+  }
+}
