@@ -1,0 +1,45 @@
+@import '../../../styles/variable.scss';
+
+.product-item-info {
+  &-option {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: calc($padding * 3);
+
+    select {
+      width: 200px;
+      height: 30px;
+    }
+  }
+
+  &-amount {
+    width: 114px;
+    height: 34px;
+    border: 1px solid $grey-color;
+
+    button {
+      width: 34px;
+      height: 100%;
+    }
+    input {
+      width: 44px;
+      height: 100%;
+      text-align: center;
+    }
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+  }
+
+  &-price {
+    margin-top: calc($padding * 4);
+
+    div {
+      padding: $padding 0;
+      font-size: calc($font-micro * 2);
+    }
+  }
+}
