@@ -1,0 +1,39 @@
+/*NavModal*/
+.Dropdown {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 60px;
+  width: 100%;
+  height: 480px;
+  background-color: beige;
+  transition: all 1s;
+
+  &.hide {
+    top: -600px;
+  }
+
+  .main-cat {
+    width: 100%;
+    height: 100%;
+
+    li {
+      display: flex;
+      margin: 50px 0 0 400px;
+
+      .main-cat-name {
+        width: 200px;
+        height: 100px;
+        background-color: gray;
+      }
+      .sub-cat {
+        width: 500px;
+        background-color: aquamarine;
+        li {
+          margin: 0px 0px 10px 10px;
+        }
+      }
+    }
+  }
+}
