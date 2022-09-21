@@ -17,10 +17,6 @@ const ProductNav = () => {
           <button>ZINWOOS Goods</button>
           <button>ZINWOOS Item</button>
         </div>
-        {/* <li>
-          <button>ZINWOOS Goods</button>
-          <button>ZINWOOS Item</button>
-        </li> */}
       </div>
       <span> / Tea Time</span>
     </nav>
