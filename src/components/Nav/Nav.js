@@ -44,7 +44,7 @@ const Nav = () => {
           <Link to="#">
             <div className="ship-tab">주문배송</div>
           </Link>
-          <Link to="/cart">
+          <Link to="#">
             <div>장바구니</div>
           </Link>
         </div>
