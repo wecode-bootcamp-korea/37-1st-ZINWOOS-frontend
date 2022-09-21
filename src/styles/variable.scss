@@ -1,21 +1,22 @@
-/* Color */
+/*칼라*/
 $white-color: #ffffff;
 $black-color: #030303;
-$blue-color: #0095f6;
-$blue-dark-color: #3b6088;
 $grey-light-color: #fafafa;
 $grey-color: #eaeaea;
 $grey-dark-color: #909090;
 $red-color: #ee4955;
+$green-light-color: #d6e6d0;
+$green-dark-color: #003628;
+$beige-color: #d5ac78;
 
-/* Size */
+/*사이즈*/
 $padding: 12px;
 
-/* Font Size */
-$font-large: 18px;
-$font-medium: 14px;
-$font-small: 12px;
-$font-micro: 10px;
+/*폰트사이즈*/
+$font-large: 48px;
+$font-medium: 22px;
+$font-small: 18px;
+$font-micro: 13px;
 
 @mixin flexSort($justify, $alignItems) {
   display: flex;
