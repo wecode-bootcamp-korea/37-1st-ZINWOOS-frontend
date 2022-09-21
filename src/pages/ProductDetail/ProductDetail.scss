@@ -11,15 +11,6 @@
     width: 1120px;
     background-color: $white-color;
 
-    &-nav {
-      margin-bottom: $padding;
-
-      select {
-        border-style: none;
-        outline: none;
-      }
-    }
-
     &-item {
       display: flex;
 

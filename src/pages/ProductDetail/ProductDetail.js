@@ -1,28 +1,19 @@
 import React from 'react';
 import PriceCalculator from './components/PriceCalculator';
+import ProductNav from './components/ProductNav';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
   return (
     <div className="ProductDetail">
       <div className="product">
-        <nav className="product-nav">
-          <span>Home / </span>
-          <select>
-            <option value="0">ZINWOOS Time</option>
-            <option value="1">ZINWOOS Goods</option>
-            <option value="2">ZINWOOS Item</option>
-          </select>
-          <span> / Tea Time</span>
-        </nav>
+        <ProductNav />
         <article className="product-item">
           <div className="product-item-img-container">
             <img alt="운동화" src="/images/ProductDetail/zinwoostime2.jpg" />
           </div>
           <div className="product-item-info">
-            <h1 className="product-item-info-title">
-              진우님과의 티타임 '1시간'
-            </h1>
+            <h1 className="product-item-info-title">진우님과의 '1시간'</h1>
             <p>
               7중 레이어 구성으로 더욱 풍성해진 코어, 쿨링 터치 기능이 있는 퀼팅
               패턴의 커버와 푹신한 솜이 구름 위에 누운듯한 사용감을 선사
