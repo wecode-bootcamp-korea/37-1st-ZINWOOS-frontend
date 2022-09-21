@@ -10,7 +10,10 @@ const ProductDetail = () => {
         <ProductNav />
         <article className="product-item">
           <div className="product-item-img-container">
-            <img alt="운동화" src="/images/ProductDetail/zinwoostime2.jpg" />
+            <img
+              alt="운동화"
+              src="https://raw.githubusercontent.com/ChoiRamsey/zinwoos/0cba83c762bdb9b0596baa6db7f069fc29b692d7/3472392085766132785_20220920151059967.jpg"
+            />
           </div>
           <div className="product-item-info">
             <h1 className="product-item-info-title">진우님과의 '1시간'</h1>
