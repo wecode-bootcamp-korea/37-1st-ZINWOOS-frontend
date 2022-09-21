@@ -32,27 +32,30 @@ const Nav = () => {
           </Link>
         </div>
         <div className="nav-menu">
-          <div onMouseOver={() => {}}>지누스</div>
+          <div>ZINWOOS</div>
           <div onMouseOver={onMouseOver}>Shop</div>
-          <div onMouseOver={() => {}}>모르겠다</div>
+          <div>모르겠다</div>
           <div>SUPPORT</div>
         </div>
         <div className="nav-control">
-          <div onClick={modalLogin}>Login & SignUp</div>
-
-          <div>주문배송</div>
-          <div>장바구니</div>
+          <div className="login-tab" onClick={modalLogin}>
+            Login & SignUp
+          </div>
+          <Link to="#">
+            <div className="ship-tab">주문배송</div>
+          </Link>
+          <Link to="/cart">
+            <div>장바구니</div>
+          </Link>
         </div>
       </div>
-      {/* {isHovering ? (
-        <Dropdown onMouseOut={onMouseOut} onMouseOver={onMouseOver} />
-      ) : null} */}
+
       <Dropdown
         onMouseOut={onMouseOut}
         onMouseOver={onMouseOver}
         isHovering={isHovering}
       />
-      {showLogin ? <Login modalLogin={modalLogin} /> : null}
+      {showLogin && <Login modalLogin={modalLogin} />}
     </div>
   );
 };

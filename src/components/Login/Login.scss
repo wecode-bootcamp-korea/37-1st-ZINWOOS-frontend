@@ -1,24 +1,22 @@
 @import '../../styles/variable.scss';
 
-.LoginBox {
+.Login {
   position: fixed;
-  z-index: 10000;
-  background-color: black;
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.8;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
 
-  .login {
-    position: absolute;
-    top: 25%;
-    padding: 30px;
+  .login-box {
     width: 500px;
     height: 604px;
-    text-align: center;
+    padding: 30px;
     background-color: $white-color;
+    text-align: center;
+    z-index: 10001;
 
     .close-btn {
       display: flex;
@@ -36,16 +34,19 @@
         }
       }
     }
+
     h1 {
       margin-bottom: 20px;
       font-size: 40px;
       font-weight: 800;
       color: blue;
     }
+
     p {
       margin-bottom: 20px;
       font-size: 20px;
     }
+
     form {
       width: 100%;
 
@@ -54,26 +55,30 @@
         height: 250px;
 
         input {
-          padding: 5px;
           width: 80%;
-          border-radius: 5px;
           margin-bottom: 20px;
+          padding: 5px;
+          border-radius: 5px;
         }
       }
+
       button {
-        padding: 10px;
         width: 200px;
         margin-bottom: 20px;
+        padding: 10px;
       }
     }
+
     .change-input-type {
       color: blue;
+
       &:hover {
         cursor: pointer;
       }
     }
   }
 }
+
 // @media screen and (max-width: 700px) {
 //   .Login {
 //     width: 700px;

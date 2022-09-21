@@ -9,32 +9,32 @@ const Dropdown = ({ onMouseOut, onMouseOver, isHovering }) => {
     >
       <ul className="main-cat" onMouseOver={onMouseOver}>
         <li>
-          <div className="main-cat-name">ZINWOOS Items</div>
+          <div className="main-cat-name">ZINWOOS ITEMS</div>
           <div className="sub-cat">
             <ul>
-              <li>a</li>
-              <li>a</li>
-              <li>a</li>
+              <li>호로록</li>
+              <li>후루룩</li>
+              <li>휘리릭</li>
             </ul>
           </div>
         </li>
         <li>
-          <div className="main-cat-name">ZINWOOS Goods</div>
+          <div className="main-cat-name">ZINWOOS GOODS</div>
           <div className="sub-cat">
             <ul>
-              <li>a</li>
-              <li>a</li>
-              <li>a</li>
+              <li>제주도</li>
+              <li>조하</li>
+              <li>후루룩</li>
             </ul>
           </div>
         </li>
         <li>
-          <div className="main-cat-name">ZINWOOS time</div>
+          <div className="main-cat-name">ZINWOOS TIME</div>
           <div className="sub-cat">
             <ul>
-              <li>a</li>
-              <li>a</li>
-              <li>a</li>
+              <li>시간은</li>
+              <li>금이야</li>
+              <li>후루룩</li>
             </ul>
           </div>
         </li>
