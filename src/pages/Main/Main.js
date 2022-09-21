@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../../components/Footer/Footer';
 import Carousel from './Carousel';
 
 const Main = () => {
@@ -57,8 +56,6 @@ const Main = () => {
         <h2 className="main-sub-title">ZINWOOS best</h2>
         <img src="" alt="" />
       </section>
-
-      <Footer />
     </div>
   );
 };
