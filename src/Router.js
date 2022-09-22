@@ -4,6 +4,7 @@ import Nav from './components/Nav/Nav';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductList from './pages/ProductList/ProductList';
 import Main from './pages/Main/Main';
+import './styles/reset.scss';
 
 const Router = () => {
   return (
