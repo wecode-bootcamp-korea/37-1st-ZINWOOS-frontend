@@ -1,0 +1,23 @@
+@import '../../../styles/variable.scss';
+
+.product-item-info-amount {
+  width: 114px;
+  height: 34px;
+  border: 1px solid $grey-color;
+
+  button {
+    width: 34px;
+    height: 100%;
+  }
+  input {
+    width: 44px;
+    height: 100%;
+    text-align: center;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+}
