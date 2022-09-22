@@ -14,17 +14,17 @@
       max-width: 1200px;
 
       .footer-logo {
+        margin-right: 50px;
         color: $white-color;
         font-family: Gugi;
         font-size: $font-medium;
-        margin-right: 50px;
       }
 
       .footer-data {
-        color: $white-color;
-        font-size: calc($font-medium - 3px);
         padding: 0 20px;
+        color: $white-color;
         text-decoration: none;
+        font-size: calc($font-medium - 3px);
       }
     }
 
@@ -42,10 +42,10 @@
         }
 
         span {
-          font-size: $font-small;
-          font-weight: 100;
           padding: 0 12px;
           border-right: 1px solid $white-color;
+          font-size: $font-small;
+          font-weight: 100;
 
           &:first-child {
             padding-left: 0;
@@ -67,14 +67,14 @@
         margin-bottom: 20px;
       }
       .customer-center-number {
-        font-size: calc($font-medium * 1.5);
         margin-bottom: 10px;
+        font-size: calc($font-medium * 1.5);
       }
 
       .customer-center-time {
+        line-height: 25px;
         font-size: $font-small;
         font-weight: 300;
-        line-height: 25px;
       }
 
       .footer-logo-wrap {
@@ -82,20 +82,20 @@
 
         .insta-logo,
         .youtube-logo {
-          background-color: $white-color;
-          opacity: 0.6;
           width: 60px;
           height: 60px;
           margin-top: 30px;
           margin-right: 10px;
           border-radius: 50%;
+          background-color: $white-color;
+          opacity: 0.6;
 
           i {
-            color: $green-dark-color;
-            font-size: calc($font-medium * 1.2);
             display: flex;
             justify-content: center;
             line-height: 60px;
+            color: $green-dark-color;
+            font-size: calc($font-medium * 1.2);
           }
         }
       }

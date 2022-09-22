@@ -35,8 +35,8 @@ const Footer = () => {
         </div>
 
         <div className="customer-center">
-          <h3 className="customer-center-title">고객센터</h3>
-          <h3 className="customer-center-number">1111-2222</h3>
+          <h5 className="customer-center-title">고객센터</h5>
+          <h5 className="customer-center-number">1111-2222</h5>
           <p className="customer-center-time">
             평일 10:00 ~ 17:00
             <br />
