@@ -1,15 +1,15 @@
 @import '../../../styles/variable.scss';
 
-.product-item-info-amount {
+.amount {
   width: 114px;
   height: 34px;
   border: 1px solid $grey-color;
 
-  button {
+  &-button {
     width: 34px;
     height: 100%;
   }
-  input {
+  &-input {
     width: 44px;
     height: 100%;
     text-align: center;

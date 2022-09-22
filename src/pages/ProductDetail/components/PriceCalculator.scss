@@ -1,22 +1,28 @@
 @import '../../../styles/variable.scss';
 
-.product-item-info {
+.product-item-contents {
   &-option {
     display: flex;
     flex-direction: column;
     margin-bottom: calc($padding * 3);
 
-    select {
+    .option-selector {
       width: 200px;
       height: 30px;
       outline: none;
+    }
+
+    &-title {
+      margin-bottom: $padding;
+      font-size: $font-small;
+      font-weight: bold;
     }
   }
 
   &-price {
     margin-top: calc($padding * 4);
 
-    div {
+    .total-price {
       padding: $padding 0;
       font-size: calc($font-micro * 2);
     }

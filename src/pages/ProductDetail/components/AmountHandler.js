@@ -10,12 +10,12 @@ const AmountHandler = ({ amount, setAmount }) => {
   };
   return (
     <div>
-      <form className="product-item-info-amount">
-        <button name="minus" onClick={amountHandler}>
+      <form className="amount">
+        <button className="amount-button" name="minus" onClick={amountHandler}>
           <i className="fa-solid fa-minus" />
         </button>
-        <input value={amount} type="number" />
-        <button name="plus" onClick={amountHandler}>
+        <input className="amount-input" value={amount} type="number" />
+        <button className="amount-button" name="plus" onClick={amountHandler}>
           <i className="fa-solid fa-plus" />
         </button>
       </form>
