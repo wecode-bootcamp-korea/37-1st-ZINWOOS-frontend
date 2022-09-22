@@ -38,8 +38,7 @@ const PriceCalculator = () => {
       </form>
       <div className="product-item-info-price">
         <h2>총 상품금액</h2>
-
-        <div>{`${price * amount + signPrice},000원`}</div>
+        <div>{`${(price + signPrice) * amount},000원`}</div>
       </div>
     </div>
   );
