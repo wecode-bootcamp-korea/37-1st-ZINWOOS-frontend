@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Login.scss';
 
-const Login = ({ modalLogin }) => {
+const Login = ({ modalLogin, setShowLogin }) => {
   const [typeOfForm, setTypeOfForm] = useState('로그인');
   const [inputValue, setInputValue] = useState({
     email: '',
@@ -26,14 +26,43 @@ const Login = ({ modalLogin }) => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  const handleLogin = () => {
-    /*로그인 성공 -> modalLogin 실행 아니면 다시입력 alert */
-    /*nav에서는 토큰 true면 로그인 메뉴가 로그아웃으로 변환 */
+  const handleLogin = e => {
+    e.preventDefault();
+    fetch('https://6fbe-211-106-114-186.jp.ngrok.io/users/signin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify({
+        email: inputValue.email,
+        password: inputValue.password,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.accessToken) {
+          alert('환영합니다');
+          setShowLogin();
+          localStorage.setItem('token', data.accessToken);
+        } else if (data.message === 'INVALID_ID') {
+          alert('아이디를 확인해주쇼');
+        } else if (data.message === 'INVALID_PW') {
+          alert('비번 확인해주쇼');
+        }
+      });
   };
 
-  const handleSignUp = () => {
-    /*회원가입 성공 -> handleForm실행 ->로그인절차 ㄱㄱ */
-    //패치 정보 다 보냄 -> then Json변환 -> then 리스폰스 출력
+  const handleSignUp = e => {
+    e.preventDefault();
+    fetch('https://6fbe-211-106-114-186.jp.ngrok.io/users/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify({
+        email: inputValue.email,
+        password: inputValue.password,
+        name: inputValue.name,
+        phoneNumber: inputValue.phoneNumber,
+        address: inputValue.address,
+      }),
+    }).then(() => alert('가입성공'));
   };
 
   const handleForm = () => {

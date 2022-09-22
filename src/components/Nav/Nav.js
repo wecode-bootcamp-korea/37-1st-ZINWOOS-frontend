@@ -7,7 +7,6 @@ import './Nav.scss';
 
 const Nav = () => {
   const [isHovering, setIsHovering] = useState(false);
-  const [selectTab, setSelectTab] = useState('');
 
   const [showLogin, setShowLogin] = useState(false);
   const onMouseOver = () => {
@@ -55,7 +54,9 @@ const Nav = () => {
         onMouseOver={onMouseOver}
         isHovering={isHovering}
       />
-      {showLogin && <Login modalLogin={modalLogin} />}
+      {showLogin && (
+        <Login setShowLogin={setShowLogin} modalLogin={modalLogin} />
+      )}
     </div>
   );
 };
