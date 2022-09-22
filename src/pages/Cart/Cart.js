@@ -1,9 +1,94 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import CartItem from './CartItem';
 
 import './Cart.scss';
 
 const Cart = () => {
+  const data = [
+    { id: 0, title: '사진', quantity: 1, price: 10000, isChecked: true },
+    { id: 1, title: '시간', quantity: 2, price: 20000, isChecked: true },
+    { id: 2, title: '포옹', quantity: 3, price: 30000, isChecked: true },
+    { id: 3, title: '티셔츠', quantity: 1, price: 40000, isChecked: true },
+  ];
+
+  const [cartList, setCartList] = useState(data);
+  const [selectAll, setSelectAll] = useState(true);
+
+  useEffect(() => {
+    let checkedArr = [];
+
+    cartList.forEach(item => checkedArr.push(item.isChecked));
+
+    if (checkedArr.includes(false)) {
+      setSelectAll(false);
+    } else {
+      setSelectAll(true);
+    }
+  }, [cartList]);
+
+  // 체크박스를 하나씩 검사해서 false가 하나라도 있으면 selectAll 을 false로
+
+  const selectAllCheckbox = () => {
+    let copy = [...cartList];
+    if (selectAll) {
+      copy.forEach(obj => {
+        obj.isChecked = false;
+      });
+    } else {
+      copy.forEach(obj => {
+        obj.isChecked = true;
+      });
+    }
+    setSelectAll(!selectAll);
+  };
+
+  const handleInput = event => {
+    const findIndex = cartList.findIndex(e => e.id == event.target.name);
+
+    let copy = [...cartList];
+    if (findIndex != -1) {
+      copy[findIndex] = {
+        ...cartList[findIndex],
+        quantity: Number(event.target.value),
+      };
+    }
+    setCartList(copy);
+  };
+
+  const removeItem = () => {
+    let copy = [...cartList];
+    console.log(copy);
+
+    let copy2 = copy.filter(item => {
+      return item.isChecked == false;
+    });
+    console.log(copy2);
+
+    setCartList(copy2);
+  };
+
+  const handleCheckbox = event => {
+    const findIndex = cartList.findIndex(e => e.id == event.target.name);
+
+    let copy = [...cartList];
+
+    if (findIndex != -1) {
+      if (copy[findIndex].isChecked) {
+        copy[findIndex] = {
+          ...cartList[findIndex],
+          isChecked: false,
+        };
+      } else {
+        copy[findIndex] = {
+          ...cartList[findIndex],
+          isChecked: true,
+        };
+      }
+    }
+    setCartList(copy);
+  };
+
   return (
     <div className="Cart">
       <div className="container">
@@ -19,7 +104,12 @@ const Cart = () => {
                   <thead>
                     <tr>
                       <th>
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          name="select-all"
+                          onChange={selectAllCheckbox}
+                          checked={selectAll}
+                        />
                       </th>
                       <th>상품정보</th>
                       <th>수량</th>
@@ -30,64 +120,54 @@ const Cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <input className="checkbox" type="checkbox" />
-                      </td>
-                      <td className="product-info">
-                        <span>
-                          <Link to="">
-                            <img
-                              src="https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true"
-                              alt="제품사진"
+                    {cartList.map((item, i) => {
+                      const { id, title, quantity, price, isChecked } = item;
+
+                      return (
+                        <tr key={id} className="cart-item">
+                          <td>
+                            <input
+                              name={id}
+                              className="checkbox"
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={handleCheckbox}
                             />
-                          </Link>
-                        </span>
-                        <div>
-                          클라우드 럭스sadfdasfadsfddd
-                          <button>옵션/수량변경</button>
-                        </div>
-                      </td>
-                      <td>
-                        <input className="number-box" type="number" />{' '}
-                        <button className="number-modify">수정</button>
-                      </td>
-                      <td>금액</td>
-                      <td>포옹</td>
-                      <td>무료배송</td>
-                      <td>60000</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="checkbox" type="checkbox" />
-                      </td>
-                      <td className="product-info">
-                        <span>
-                          <Link to="">
-                            <img
-                              src="https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true"
-                              alt="제품사진"
+                          </td>
+                          <td className="product-info">
+                            <span>
+                              <Link to="">
+                                <img
+                                  src="https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true"
+                                  alt="제품사진"
+                                />
+                              </Link>
+                            </span>
+                            <div>{title}</div>
+                          </td>
+                          <td>
+                            <input
+                              name={id}
+                              className="number-box"
+                              type="number"
+                              value={quantity}
+                              onChange={handleInput}
                             />
-                          </Link>
-                        </span>
-                        <div>
-                          클라우드 럭스sadfdasfadsfddd
-                          <button>옵션/수량변경</button>
-                        </div>
-                      </td>
-                      <td>
-                        <input className="number-box" type="number" />{' '}
-                        <button className="number-modify">수정</button>
-                      </td>
-                      <td>금액</td>
-                      <td>포옹</td>
-                      <td>무료배송</td>
-                      <td>60000</td>
-                    </tr>
+                            <button className="number-modify">수정</button>
+                          </td>
+                          <td>{price}</td>
+                          <td>지누쓰마음</td>
+                          <td>무료배송</td>
+                          <td>{quantity * price}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
                 <div className="remove-box">
-                  <button className="remove-btn">선택 상품 삭제</button>
+                  <button onClick={removeItem} className="remove-btn">
+                    선택 상품 삭제
+                  </button>
                 </div>
                 <div className="price-box">
                   <ul>
@@ -96,17 +176,17 @@ const Cart = () => {
                       <div>forEach += 데이터.금액</div>
                     </li>
                     <li>
-                      <i class="fa-solid fa-minus" />
+                      <i className="fa-solid fa-minus" />
                       <div>할인 금액 합계</div>
                       <div>0원</div>
                     </li>
                     <li>
-                      <i class="fa-solid fa-plus" />
+                      <i className="fa-solid fa-plus" />
                       <div>배송비</div>
                       <div>5만이상 ? 무료 : 3천원</div>
                     </li>
                     <li>
-                      <i class="fa-solid fa-equals" />
+                      <i className="fa-solid fa-equals" />
                       <div>결제 예정 금액</div>
                       <div>(합계 + 배송비)원</div>
                     </li>
