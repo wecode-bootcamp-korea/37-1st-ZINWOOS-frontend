@@ -1,0 +1,48 @@
+@import '../../styles/variable.scss';
+
+.SubNav {
+  display: flex;
+  margin-bottom: $padding;
+  width: 1080px;
+  color: $grey-dark-color;
+
+  .nav-link {
+    width: 130px;
+    position: relative;
+
+    button:first-child {
+      padding: 0 0 6px 0;
+    }
+
+    div {
+      display: none;
+    }
+
+    &.active {
+      div {
+        position: absolute;
+        display: block;
+
+        button {
+          display: flex;
+          padding: calc($padding/2);
+          margin-left: $padding;
+
+          &:hover {
+            background-color: $green-dark-color;
+            color: $white-color;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      border-style: none;
+      outline: none;
+      background-color: $white-color;
+      color: $grey-dark-color;
+    }
+  }
+}
