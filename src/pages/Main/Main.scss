@@ -4,20 +4,20 @@
   margin-top: 60px;
 
   .main-title {
+    @include flexSort(center, center);
+    margin-top: 100px;
     color: $green-dark-color;
     font-size: $font-large;
     font-weight: 700;
-    @include flexSort(center, center);
-    margin-top: 100px;
   }
 
   .main-content {
+    margin: 60px 0 100px 0;
     color: $green-dark-color;
     font-size: $font-medium;
     font-weight: 500;
-    line-height: 40px;
-    margin: 60px 0 100px 0;
     text-align: center;
+    line-height: 40px;
   }
 
   .main-youtube {
@@ -25,8 +25,9 @@
   }
 
   .main-ul {
-    padding: 100px;
     @include flexSort(center, center);
+    margin-bottom: 30px;
+    padding: 100px;
 
     .main-li {
       width: 900px;

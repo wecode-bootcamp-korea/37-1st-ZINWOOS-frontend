@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewItem.scss';
 
 const NewItem = () => {
   return (
@@ -17,8 +18,8 @@ const NewItem = () => {
                   alt={item.description}
                 />
               </div>
-              <h3 className="New-product-title">{item.name}</h3>
-              <h5 className="New-product-content">{item.description}</h5>
+              <h2 className="New-product-title">{item.name}</h2>
+              <p className="New-product-content">{item.description}</p>
             </div>
           );
         })}

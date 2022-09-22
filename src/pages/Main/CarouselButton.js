@@ -1,4 +1,5 @@
 import React from 'react';
+import './CarouselButton.scss';
 
 const CarouselButton = ({ click, onClick }) => {
   return (

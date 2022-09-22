@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel';
 import NewItem from './NewItem';
+import './Main.scss';
 
 const Main = () => {
   return (

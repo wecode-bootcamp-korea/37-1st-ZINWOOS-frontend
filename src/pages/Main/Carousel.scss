@@ -2,16 +2,15 @@
 
 .Carousel {
   height: 50vw;
-  // width: 600vw;
   overflow: hidden;
 
   .carousel-container {
-    width: 100vw;
-    height: 80vw;
     display: flex;
+    width: 100vw;
+    height: 75vw;
 
     .main-pic {
-      width: 100%;
+      width: 100vw;
       transform: translate(0, -150px);
     }
   }
