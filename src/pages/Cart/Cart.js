@@ -14,7 +14,7 @@ const Cart = () => {
 
   const [cartList, setCartList] = useState(data);
   const [selectAll, setSelectAll] = useState(true);
-
+  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     let checkedArr = [];
 
@@ -27,7 +27,15 @@ const Cart = () => {
     }
   }, [cartList]);
 
-  // 체크박스를 하나씩 검사해서 false가 하나라도 있으면 selectAll 을 false로
+  useEffect(() => {
+    const a = cartList.filter(item => item.isChecked === true);
+    let price = 0;
+    a.forEach(item => {
+      price += item.quantity * item.price;
+    });
+    console.log(price);
+    setTotalPrice(price);
+  }, [cartList]);
 
   const selectAllCheckbox = () => {
     let copy = [...cartList];
@@ -43,9 +51,29 @@ const Cart = () => {
     setSelectAll(!selectAll);
   };
 
+  const setQuantitiy = event => {
+    const findIndex = cartList.findIndex(e => e.id == event.target.name);
+    let copy = [...cartList];
+    if (findIndex > -1 && event.target.innerHTML === '+') {
+      copy[findIndex] = {
+        ...cartList[findIndex],
+        quantity: cartList[findIndex].quantity + 1,
+      };
+    } else if (
+      findIndex > -1 &&
+      event.target.innerHTML === '-' &&
+      cartList[findIndex].quantity > 0
+    ) {
+      copy[findIndex] = {
+        ...cartList[findIndex],
+        quantity: cartList[findIndex].quantity - 1,
+      };
+    }
+    setCartList(copy);
+  };
+
   const handleInput = event => {
     const findIndex = cartList.findIndex(e => e.id == event.target.name);
-
     let copy = [...cartList];
     if (findIndex != -1) {
       copy[findIndex] = {
@@ -58,12 +86,10 @@ const Cart = () => {
 
   const removeItem = () => {
     let copy = [...cartList];
-    console.log(copy);
 
     let copy2 = copy.filter(item => {
       return item.isChecked == false;
     });
-    console.log(copy2);
 
     setCartList(copy2);
   };
@@ -146,6 +172,9 @@ const Cart = () => {
                             <div>{title}</div>
                           </td>
                           <td>
+                            <button name={id} onClick={setQuantitiy}>
+                              -
+                            </button>
                             <input
                               name={id}
                               className="number-box"
@@ -153,7 +182,11 @@ const Cart = () => {
                               value={quantity}
                               onChange={handleInput}
                             />
-                            <button className="number-modify">수정</button>
+                            <button name={id} onClick={setQuantitiy}>
+                              +
+                            </button>
+
+                            {/* <button className="number-modify">수정</button> */}
                           </td>
                           <td>{price}</td>
                           <td>지누쓰마음</td>
@@ -173,7 +206,7 @@ const Cart = () => {
                   <ul>
                     <li>
                       <div>합계금액</div>
-                      <div>forEach += 데이터.금액</div>
+                      <div>{totalPrice}</div>
                     </li>
                     <li>
                       <i className="fa-solid fa-minus" />
