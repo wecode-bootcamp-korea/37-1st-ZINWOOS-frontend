@@ -1,0 +1,58 @@
+@import '../../styles/variable.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@100;300;400;700;900&display=swap');
+
+.NewItem {
+  background-color: $grey-color;
+  width: 100vw;
+  height: auto;
+  padding: 100px 50px;
+
+  .New-sub-title {
+    color: $green-dark-color;
+    font-family: 'Noto Serif Georgian', serif;
+    font-weight: 700;
+    font-size: $font-large;
+  }
+
+  .New-sub-content {
+    font-size: calc($font-medium * 1.4);
+    font-weight: 100;
+    color: $green-dark-color;
+    margin-top: 40px;
+    margin-bottom: 80px;
+  }
+
+  .New-product-wrap {
+    display: flex;
+    overflow: scroll;
+
+    .New-product {
+      margin-right: 30px;
+
+      .New-product-image {
+        background-color: aqua;
+        width: 500px;
+        height: 500px;
+        margin-bottom: 30px;
+        overflow: hidden;
+
+        .product-image {
+          height: 100%;
+          transform: translate(-60px, 0);
+        }
+      }
+      .New-product-title {
+        font-size: $font-medium;
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+
+      .New-product-content {
+        font-size: $font-small;
+        font-weight: 100;
+        margin-bottom: 50px;
+      }
+    }
+  }
+}

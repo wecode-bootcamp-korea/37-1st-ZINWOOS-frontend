@@ -1,9 +1,9 @@
 @import '../../styles/variable.scss';
 
 .Carousel {
-  overflow: hidden;
   height: 50vw;
-  width: 600vw;
+  // width: 600vw;
+  overflow: hidden;
 
   .carousel-container {
     width: 100vw;

@@ -2,7 +2,6 @@
 
 .Main {
   margin-top: 60px;
-  overflow: hidden;
 
   .main-title {
     color: $green-dark-color;
@@ -31,9 +30,11 @@
 
     .main-li {
       width: 900px;
+
       &:not(:last-child) {
-        border-right: 1px solid $grey-dark-color;
+        border-right: 1px solid $grey-color;
       }
+
       p {
         font-size: $font-medium;
         font-weight: 300;

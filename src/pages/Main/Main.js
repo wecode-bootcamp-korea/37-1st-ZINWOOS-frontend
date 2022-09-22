@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from './Carousel';
-import Best from './Best';
+import NewItem from './NewItem';
 
 const Main = () => {
   return (
@@ -46,14 +46,11 @@ const Main = () => {
         </li>
         <li className="main-li">
           <img src="" alt="" />
-          <p>
-            글로벌 소비자 평점 4.5점의 <br />
-            검증 받은 브랜드
-          </p>
+          <p>검증 받은 브랜드</p>
         </li>
       </ul>
 
-      <Best />
+      <NewItem />
     </div>
   );
 };
