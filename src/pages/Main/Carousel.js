@@ -1,42 +1,54 @@
 import React, { useEffect, useState } from 'react';
+import CarouselButton from './CarouselButton';
 
 const Carousel = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [animate, setAnimate] = useState('animation');
 
   const prevBtn = () => {
-    setCurrentSlide(current => current + 100);
-    if (currentSlide === 0) {
-      return setCurrentSlide(0);
+    setCurrentIndex(currentIndex + 1);
+    if (currentIndex === 0) {
+      setAnimate('');
+      return setCurrentIndex(-4);
     }
+    setAnimate('animation');
   };
 
   const nextBtn = () => {
-    setCurrentSlide(current => current - 100);
-    if (currentSlide === -300) {
-      return setCurrentSlide(0);
+    setCurrentIndex(currentIndex - 1);
+    if (currentIndex === -5) {
+      setAnimate('');
+      return setCurrentIndex(-1);
     }
-  };
-
-  const infinite = () => {
-    setCurrentSlide(current => current - 100);
-
-    if (currentSlide === -300) {
-      return setCurrentSlide(0);
-    }
+    setAnimate('animation');
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      infinite();
-    }, 3000);
+      setCurrentIndex(current => current - 1);
+    }, 5000);
     return () => clearInterval(interval);
-  });
+  }, []);
+
+  useEffect(() => {
+    if (currentIndex === -1 * (MAIN_CAROUSEL.length - 1)) {
+      setTimeout(() => {
+        setAnimate('');
+        setCurrentIndex(-1);
+      }, 500);
+      setTimeout(() => {
+        setAnimate('animation');
+      }, 600);
+    }
+  }, [currentIndex]);
 
   return (
     <div className="Carousel">
       <div
-        className="carousel-container"
-        style={{ transform: `transLateX(${currentSlide}vw)` }}
+        className={`carousel-container ${animate}`}
+        style={{
+          transform: `transLateX(${currentIndex}00vw`,
+        }}
       >
         {MAIN_CAROUSEL.map((item, index) => {
           return (
@@ -49,12 +61,9 @@ const Carousel = () => {
           );
         })}
       </div>
-      <button className="carousel-prev-btn" onClick={prevBtn}>
-        <div className="square-box" />
-      </button>
-      <button className="carousel-next-btn" onClick={nextBtn}>
-        <div className="square-box" />
-      </button>
+
+      <CarouselButton click="prev" onClick={prevBtn} />
+      <CarouselButton click="next" onClick={nextBtn} />
     </div>
   );
 };
@@ -62,6 +71,11 @@ const Carousel = () => {
 export default Carousel;
 
 const MAIN_CAROUSEL = [
+  {
+    id: 0,
+    name: '진우님-메인사진4',
+    src: 'images/Main/n_IMG_5588.jpg',
+  },
   {
     id: 1,
     name: '진우님-메인사진1',
@@ -81,5 +95,10 @@ const MAIN_CAROUSEL = [
     id: 4,
     name: '진우님-메인사진4',
     src: 'images/Main/n_IMG_5588.jpg',
+  },
+  {
+    id: 5,
+    name: '진우님-메인사진1',
+    src: 'images/Main/IMG_2046.jpg',
   },
 ];

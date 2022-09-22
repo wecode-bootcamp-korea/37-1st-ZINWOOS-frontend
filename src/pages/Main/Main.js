@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel from './Carousel';
+import Best from './Best';
 
 const Main = () => {
   return (
@@ -52,10 +53,7 @@ const Main = () => {
         </li>
       </ul>
 
-      <section className="main-best">
-        <h2 className="main-sub-title">ZINWOOS best</h2>
-        <img src="" alt="" />
-      </section>
+      <Best />
     </div>
   );
 };

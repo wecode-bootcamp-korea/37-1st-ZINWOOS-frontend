@@ -1,0 +1,97 @@
+@import '../../styles/variable.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@100;300;400;700;900&display=swap');
+
+.Best {
+  background-color: $grey-color;
+  width: 100vw;
+  min-width: 700px;
+  height: auto;
+  padding: 100px 50px;
+
+  .main-sub-title {
+    color: $green-dark-color;
+    font-family: 'Noto Serif Georgian', serif;
+    font-weight: 700;
+    font-size: $font-large;
+  }
+
+  .main-sub-content {
+    font-size: calc($font-medium * 1.4);
+    font-weight: 100;
+    color: $green-dark-color;
+    margin-top: 40px;
+    margin-bottom: 80px;
+  }
+
+  .img-wrap {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 30px;
+
+    .best-img-title {
+      font-size: $font-medium;
+      color: $green-dark-color;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .best-img-content {
+      font-size: $font-small;
+      font-weight: 100;
+      color: $green-dark-color;
+    }
+
+    .left {
+      margin-bottom: 50px;
+
+      .left-img {
+        width: 600px;
+        height: 500px;
+        margin-bottom: 40px;
+        overflow: hidden;
+
+        .best-img-1 {
+          width: 110%;
+          transform: translate(-20px, 0px);
+        }
+      }
+    }
+
+    .right {
+      margin-bottom: 50px;
+      // position: absolute;
+
+      .right-img {
+        width: 600px;
+        height: 500px;
+        margin-bottom: 40px;
+        overflow: hidden;
+        background-color: aquamarine;
+
+        .best-img-2 {
+          width: 110%;
+          transform: translate(-20px, 0px);
+        }
+      }
+    }
+
+    .right-bottom {
+      float: inline-start;
+
+      .right-img {
+        width: 600px;
+        height: 500px;
+        margin-bottom: 40px;
+        overflow: hidden;
+        background-color: cadetblue;
+
+        .best-img-2 {
+          width: 110%;
+          transform: translate(-20px, 0px);
+        }
+      }
+    }
+  }
+}
