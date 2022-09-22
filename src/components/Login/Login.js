@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Login.scss';
 
 const Login = ({ modalLogin, setShowLogin }) => {
@@ -40,12 +40,11 @@ const Login = ({ modalLogin, setShowLogin }) => {
       .then(data => {
         if (data.accessToken) {
           alert('환영합니다');
-          setShowLogin();
+          setShowLogin(false);
           localStorage.setItem('token', data.accessToken);
-        } else if (data.message === 'INVALID_ID') {
-          alert('아이디를 확인해주쇼');
-        } else if (data.message === 'INVALID_PW') {
-          alert('비번 확인해주쇼');
+          window.location.reload();
+        } else if (data.message === 'INVALID_USER') {
+          alert('등록되지 않은 사용자입니다.');
         }
       });
   };
@@ -75,8 +74,6 @@ const Login = ({ modalLogin, setShowLogin }) => {
 
   const submitValue = e => {
     e.preventDefault();
-    // 나중에 로그인 성공해서 토큰 받으면?
-    // setShowLogin(false); 조건식
   };
 
   return (
