@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Nav = () => {
-  return <div>zinwoos nav</div>;
+  return <div className="Nav">zinwoos nav</div>;
 };
 
 export default Nav;
