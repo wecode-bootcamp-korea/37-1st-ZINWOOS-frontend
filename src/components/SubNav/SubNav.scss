@@ -2,47 +2,47 @@
 
 .SubNav {
   display: flex;
-  margin-bottom: $padding;
   width: 1080px;
+  margin-bottom: $padding;
   color: $grey-dark-color;
 
   .nav-link {
-    width: 130px;
     position: relative;
+    width: 130px;
 
-    button:first-child {
+    .fixed-link {
+      width: 100%;
       padding: 0 0 6px 0;
+      color: $grey-dark-color;
+      background-color: $white-color;
+      border-style: none;
     }
 
-    div {
+    .active-link {
       display: none;
     }
 
     &.active {
-      div {
+      .active-links {
         position: absolute;
         display: block;
 
-        button {
+        .active-link {
           display: flex;
-          padding: calc($padding/2);
+          width: 100%;
           margin-left: $padding;
+          padding: calc($padding/2);
+          color: $grey-dark-color;
+          background-color: $white-color;
+          border-style: none;
 
           &:hover {
-            background-color: $green-dark-color;
             color: $white-color;
+            background-color: $green-dark-color;
             cursor: pointer;
           }
         }
       }
-    }
-
-    button {
-      width: 100%;
-      border-style: none;
-      outline: none;
-      background-color: $white-color;
-      color: $grey-dark-color;
     }
   }
 }
