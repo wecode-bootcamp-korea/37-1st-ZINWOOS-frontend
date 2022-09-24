@@ -1,0 +1,29 @@
+@import 'src/styles/variable.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;500;700&display=swap');
+
+.ProductDetailTab {
+  .detail-menu-bar {
+    @include flexSort(center, '');
+
+    .tabs {
+      @include flexSort(space-around, '');
+      width: 1130px;
+      border-bottom: 1px solid $grey-color;
+
+      .tab {
+        margin: 30px;
+        color: $green-dark-color;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: $font-small;
+        font-weight: 400;
+        cursor: pointer;
+
+        &:hover {
+          color: $green-dark-color;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
