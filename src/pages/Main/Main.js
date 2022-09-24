@@ -1,12 +1,7 @@
 import React from 'react';
-import ProductDetailTab from '../ProductDetailTab/ProductDetailTab';
 
 const Main = () => {
-  return (
-    <div>
-      <ProductDetailTab />
-    </div>
-  );
+  return <div>hi zinwoos!</div>;
 };
 
 export default Main;
