@@ -9,7 +9,7 @@
 
   .product-wrap {
     width: 1080px;
-    padding: calc($padding * 2);
+    padding: calc($padding * 4) calc($padding * 2) 0 calc($padding * 2);
     background-color: $white-color;
   }
 
@@ -20,18 +20,8 @@
     &-item {
       display: flex;
 
-      &-img-container {
-        min-width: 500px;
-        height: 500px;
-        overflow: hidden;
-
-        .product-img {
-          width: 100%;
-        }
-      }
-
       &-contents {
-        padding: 0 calc($padding * 2);
+        padding: 0 0 0 calc($padding * 2);
 
         button,
         input {
@@ -39,24 +29,25 @@
         }
 
         &-title {
-          margin-bottom: $padding;
           color: $green-dark-color;
-          font-size: $font-medium;
+          font-size: calc($font-small * 2);
           font-weight: bold;
         }
 
         &-info {
-          margin-bottom: calc($padding * 2);
-          padding: calc($padding * 2) 0;
+          width: 420px;
+          padding: $padding 0 calc($padding * 2) 0;
           color: $grey-dark-color;
           border-bottom: 1px solid $grey-color;
           font-size: calc($font-micro + 2px);
+          line-height: 22px;
         }
 
         &-ship {
-          margin-bottom: calc($padding * 3);
+          margin: 40px 0 53px 0;
           color: $grey-dark-color;
           font-size: $font-micro;
+          line-height: 20px;
 
           li {
             margin-right: $padding;
@@ -65,7 +56,7 @@
 
         &-buttons {
           display: flex;
-          margin: calc($padding * 2) 0;
+          margin: calc($padding * 5) 0;
 
           .payment-button,
           .cart-button {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PriceCalculator from './components/PriceCalculator';
+import ProductImg from './components/ProductImg';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
@@ -8,13 +9,7 @@ const ProductDetail = () => {
       <div className="product-wrap">
         <div className="product">
           <article className="product-item">
-            <div className="product-item-img-container">
-              <img
-                className="product-img"
-                alt="진우님의 시간"
-                src="https://raw.githubusercontent.com/ChoiRamsey/zinwoos/0cba83c762bdb9b0596baa6db7f069fc29b692d7/3472392085766132785_20220920151059967.jpg"
-              />
-            </div>
+            <ProductImg />
             <div className="product-item-contents">
               <h1 className="product-item-contents-title">
                 진우님과의 '1시간'
