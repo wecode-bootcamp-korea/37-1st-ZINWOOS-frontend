@@ -1,0 +1,50 @@
+/*NavModal*/
+.Dropdown {
+  position: absolute;
+  top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 330px;
+  background-color: #f5f4f1;
+  transition: all 0.3s;
+
+  &.hide {
+    top: -600px;
+  }
+
+  .main-cat {
+    width: 100%;
+    height: 100%;
+
+    & > li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      .main-cat-name {
+        display: flex;
+        width: 200px;
+        height: 80px;
+        border-bottom: 1px solid rgb(216, 211, 211);
+        font-size: 18px;
+      }
+
+      .sub-cat {
+        display: flex;
+        align-items: center;
+        height: 80px;
+        width: 400px;
+        font-size: 16px;
+        border-bottom: 1px solid rgb(216, 211, 211);
+
+        li {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
