@@ -82,7 +82,6 @@ const Cart = () => {
     // console.log(orderList);
     //백엔드 통신 대비용 메모입니다.
     const checkConfirm = window.confirm('주문하시겠?');
-    console.log(checkConfirm);
   };
 
   const selectAllCheckbox = () => {
