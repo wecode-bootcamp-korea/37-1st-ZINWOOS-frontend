@@ -1,26 +1,62 @@
 import { React, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import CartItem from './CartItem';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Cart.scss';
 
 const Cart = () => {
   const data = [
-    { id: 0, title: '사진', quantity: 1, price: 10000, isChecked: true },
-    { id: 1, title: '시간', quantity: 2, price: 20000, isChecked: true },
-    { id: 2, title: '포옹', quantity: 3, price: 30000, isChecked: true },
-    { id: 3, title: '티셔츠', quantity: 1, price: 40000, isChecked: true },
+    {
+      id: 0,
+      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
+      title: '사진',
+      option: '친필 사인 추가',
+      quantity: 1,
+      price: 10000,
+      isChecked: 1,
+    },
+    {
+      id: 1,
+      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
+      title: '시간',
+      option: '친필 사인 추가',
+      quantity: 2,
+      price: 20000,
+      isChecked: 1,
+    },
+    {
+      id: 2,
+      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
+      title: '포옹',
+      option: '친필 사인 추가',
+      quantity: 3,
+      price: 30000,
+      isChecked: 1,
+    },
+    {
+      id: 3,
+      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
+      title: '티셔츠',
+      option: '친필 사인 추가',
+      quantity: 1,
+      price: 40000,
+      isChecked: 1,
+    },
   ];
-
+  // isChecked : 1  수정 시작!
   const [cartList, setCartList] = useState(data);
   const [selectAll, setSelectAll] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [shipFee, setShipFee] = useState(3000);
+  const orderPrice = totalPrice + shipFee;
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     let checkedArr = [];
 
     cartList.forEach(item => checkedArr.push(item.isChecked));
 
-    if (checkedArr.includes(false)) {
+    if (checkedArr.includes(0)) {
       setSelectAll(false);
     } else {
       setSelectAll(true);
@@ -28,54 +64,78 @@ const Cart = () => {
   }, [cartList]);
 
   useEffect(() => {
-    const a = cartList.filter(item => item.isChecked === true);
+    const buyList = cartList.filter(item => Boolean(item.isChecked));
     let price = 0;
-    a.forEach(item => {
+    buyList.forEach(item => {
       price += item.quantity * item.price;
     });
-    console.log(price);
+    price > 50000 ? setShipFee(0) : setShipFee(3000);
+
     setTotalPrice(price);
   }, [cartList]);
+
+  const submitOrder = () => {
+    const orderList = cartList.filter(item => item.isChecked === 1);
+    //서브밋할 때는 orderList와 orderPrice 보내주면 됨
+    // console.log(cartList);
+    // console.log(orderPrice);
+    // console.log(orderList);
+    //백엔드 통신 대비용 메모입니다.
+    const checkConfirm = window.confirm('주문하시겠?');
+    console.log(checkConfirm);
+  };
 
   const selectAllCheckbox = () => {
     let copy = [...cartList];
     if (selectAll) {
+      //true
       copy.forEach(obj => {
-        obj.isChecked = false;
+        obj.isChecked = 0;
       });
     } else {
       copy.forEach(obj => {
-        obj.isChecked = true;
+        obj.isChecked = 1;
       });
     }
-    setSelectAll(!selectAll);
+    setSelectAll(!selectAll); //false
   };
 
   const setQuantitiy = event => {
-    const findIndex = cartList.findIndex(e => e.id == event.target.name);
+    const findIndex = cartList.findIndex(
+      e => e.id === Number(event.target.name)
+    );
     let copy = [...cartList];
     if (findIndex > -1 && event.target.innerHTML === '+') {
       copy[findIndex] = {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity + 1,
       };
+      if (copy[findIndex].quantity !== 0) {
+        copy[findIndex].isChecked = 1;
+      }
     } else if (
       findIndex > -1 &&
       event.target.innerHTML === '-' &&
-      cartList[findIndex].quantity > 0
+      cartList[findIndex].quantity > 1
     ) {
       copy[findIndex] = {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity - 1,
       };
+      if (copy[findIndex].quantity === 0) {
+        copy[findIndex].isChecked = 0;
+      }
     }
+
     setCartList(copy);
   };
 
   const handleInput = event => {
-    const findIndex = cartList.findIndex(e => e.id == event.target.name);
+    const findIndex = cartList.findIndex(
+      e => e.id === Number(event.target.name)
+    );
     let copy = [...cartList];
-    if (findIndex != -1) {
+    if (findIndex !== -1) {
       copy[findIndex] = {
         ...cartList[findIndex],
         quantity: Number(event.target.value),
@@ -88,33 +148,34 @@ const Cart = () => {
     let copy = [...cartList];
 
     let copy2 = copy.filter(item => {
-      return item.isChecked == false;
+      return Number(item.isChecked) === 0;
     });
 
     setCartList(copy2);
   };
 
   const handleCheckbox = event => {
-    const findIndex = cartList.findIndex(e => e.id == event.target.name);
+    const findIndex = cartList.findIndex(
+      e => e.id === Number(event.target.name)
+    );
 
     let copy = [...cartList];
 
-    if (findIndex != -1) {
+    if (findIndex !== -1) {
       if (copy[findIndex].isChecked) {
         copy[findIndex] = {
           ...cartList[findIndex],
-          isChecked: false,
+          isChecked: 0,
         };
       } else {
         copy[findIndex] = {
           ...cartList[findIndex],
-          isChecked: true,
+          isChecked: 1,
         };
       }
     }
     setCartList(copy);
   };
-
   return (
     <div className="Cart">
       <div className="container">
@@ -147,8 +208,8 @@ const Cart = () => {
                   </thead>
                   <tbody>
                     {cartList.map((item, i) => {
-                      const { id, title, quantity, price, isChecked } = item;
-
+                      const { id, title, option, quantity, price, isChecked } =
+                        item;
                       return (
                         <tr key={id} className="cart-item">
                           <td>
@@ -169,10 +230,17 @@ const Cart = () => {
                                 />
                               </Link>
                             </span>
-                            <div>{title}</div>
+                            <div>
+                              <div>{title}</div>
+                              {option && <div>{`옵션: ${option}`}</div>}
+                            </div>
                           </td>
                           <td>
-                            <button name={id} onClick={setQuantitiy}>
+                            <button
+                              name={id}
+                              onClick={setQuantitiy}
+                              className="count-btn"
+                            >
                               -
                             </button>
                             <input
@@ -182,11 +250,13 @@ const Cart = () => {
                               value={quantity}
                               onChange={handleInput}
                             />
-                            <button name={id} onClick={setQuantitiy}>
+                            <button
+                              name={id}
+                              onClick={setQuantitiy}
+                              className="count-btn"
+                            >
                               +
                             </button>
-
-                            {/* <button className="number-modify">수정</button> */}
                           </td>
                           <td>{price}</td>
                           <td>지누쓰마음</td>
@@ -216,19 +286,33 @@ const Cart = () => {
                     <li>
                       <i className="fa-solid fa-plus" />
                       <div>배송비</div>
-                      <div>5만이상 ? 무료 : 3천원</div>
+                      {totalPrice === 0 ? (
+                        <div>상품을 추가 시 결정</div>
+                      ) : (
+                        <div>{shipFee === 0 ? '무료' : shipFee}</div>
+                      )}
                     </li>
                     <li>
                       <i className="fa-solid fa-equals" />
                       <div>결제 예정 금액</div>
-                      <div>(합계 + 배송비)원</div>
+                      <div>
+                        {totalPrice > 50000
+                          ? `${totalPrice}원`
+                          : `${totalPrice + shipFee}원`}
+                      </div>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="complete-btn">
-                <button>쇼핑 계속하기</button>
-                <button>주문하기</button>
+                <button
+                  onClick={() => {
+                    navigate('/main');
+                  }}
+                >
+                  쇼핑 계속하기
+                </button>
+                <button onClick={submitOrder}>주문하기</button>
               </div>
             </div>
           </div>

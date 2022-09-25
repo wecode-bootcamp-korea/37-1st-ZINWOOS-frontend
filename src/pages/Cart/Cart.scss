@@ -62,17 +62,34 @@
               .cart-item {
                 border-top: 1px solid #dbdbdb;
 
+                .count-btn {
+                  width: 30px;
+                  height: 30px;
+                  margin: 0 3px;
+                  font-size: 20px;
+                  color: #003628;
+                  background-color: white;
+                }
+
                 .product-info {
                   display: flex;
                   vertical-align: center;
-                  padding-right: 10px;
-                  // width: 581px;
+                  // padding-right: 10px;
 
                   div {
+                    width: 150px;
                     position: relative;
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+                    div:first-child {
+                      margin-bottom: 5px;
+                      font-size: 18px;
+                    }
+                    div:nth-child(2) {
+                      color: gray;
+                      font-size: 14px;
+                    }
 
                     button {
                       position: absolute;
