@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PriceCalculator from './components/PriceCalculator';
 import ProductImg from './components/ProductImg';
@@ -8,24 +8,25 @@ const ProductDetail = () => {
   const params = useParams();
   const productId = params.itemId;
   const [product, setProduct] = useState({});
-  const { name, description, price, image_url } = product;
+  const { name, description, price, image_url, option_price } = product;
 
   useEffect(() => {
-    fetch(`http://172.20.10.3:3000/items/${productId}`)
+    fetch('/data/item.json')
       .then(response => response.json())
       .then(result => {
         setProduct(result.data[0]);
       });
   }, [productId]);
 
-  console.log(product);
+  // `http://172.20.10.3:3000/items/${productId}`;
+
   return (
     <div className="ProductDetail">
       <div className="product-wrap">
         <div className="product">
           <article className="product-item">
             {Object.keys(product).length !== 0 && (
-              <ProductImg img={image_url} />
+              <ProductImg img={image_url} alt={name} />
             )}
             <div className="product-item-contents">
               <h1 className="product-item-contents-title">{name}</h1>
@@ -38,7 +39,7 @@ const ProductDetail = () => {
                 </li>
                 <li>50,000원 이상 구매시 무료 / 제주,도서지역 추가 3,000원</li>
               </ul>
-              <PriceCalculator price={price} />
+              <PriceCalculator price={price} option_price={option_price} />
               <form className="product-item-contents-buttons">
                 <input
                   className="payment-button"
