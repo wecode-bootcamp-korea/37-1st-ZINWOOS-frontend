@@ -5,44 +5,15 @@
     text-decoration: none;
     color: black;
   }
-  margin-top: 60px;
-
-  .main-image-tag {
-    width: 100%;
-    height: 600px;
-    position: relative;
-  }
-  .main-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .main-header {
-    width: 100%;
-    position: absolute;
-    top: 40%;
-    text-align: center;
-  }
-  .header-name {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100px;
-  }
-  .second-header {
-    font-size: 16px;
-    margin: 15px 0px 15px 0px;
-  }
   .move-solt {
     display: flex;
     margin-bottom: 20px;
   }
   .product-move {
     width: 50%;
-    font-size: 13px;
-    font-weight: bold;
   }
   .product-sort {
     width: 50%;
-
     font-size: 13px;
     color: rgb(189, 189, 189);
   }
@@ -64,75 +35,6 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0 -20px;
-  }
-  .product-image {
-    flex: 1 33.333%;
-    height: 583px;
-    padding: 0 20px;
-  }
-
-  .thumb {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-
-    .model {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .model:hover {
-    filter: brightness(0.5);
-    transition: 0.5s;
-  }
-  .product-name {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 15px;
-  }
-  .shirts-info {
-    height: 30px;
-    margin-top: 10px;
-    font-size: 14px;
-    color: rgb(109, 107, 100);
-  }
-  .price {
-    margin: 10px 0px 20px 0px;
-    font-size: 15px;
-    font-weight: bold;
-    color: rgb(109, 107, 100);
-  }
-  .option {
-    background-color: rgb(207, 174, 127);
-    margin-top: 20px;
-    font-size: 25px;
-    text-align: center;
-    display: inline;
-  }
-  .option2 {
-    background-color: yellow;
-    margin-top: 20px;
-    font-size: 25px;
-    text-align: center;
-    display: inline;
-    margin-left: 5px;
-  }
-  .option3 {
-    background-color: red;
-    margin-top: 20px;
-    font-size: 25px;
-    text-align: center;
-    display: inline;
-    margin-left: 5px;
   }
   li {
     float: left;

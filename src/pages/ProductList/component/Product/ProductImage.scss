@@ -1,0 +1,72 @@
+.ProductImage {
+  width: 33.333%;
+  height: 583px;
+  padding: 0 20px;
+
+  .thumb {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .model {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+
+  .model:hover {
+    filter: brightness(0.6);
+    transition: 0.5s;
+  }
+  .product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  .shirts-info {
+    height: 30px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgb(109, 107, 100);
+  }
+  .price {
+    margin: 10px 0px 20px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(109, 107, 100);
+  }
+  .option {
+    background-color: rgb(207, 174, 127);
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    display: inline;
+    padding: 3px;
+  }
+  .option2 {
+    background-color: yellow;
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    display: inline;
+    margin-left: 5px;
+    padding: 3px;
+  }
+  .option3 {
+    background-color: red;
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    display: inline;
+    margin-left: 5px;
+    padding: 3px;
+  }
+}
