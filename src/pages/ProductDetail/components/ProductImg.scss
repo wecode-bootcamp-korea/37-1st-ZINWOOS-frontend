@@ -1,0 +1,32 @@
+@import '../../../styles/variable.scss';
+
+.product-img-container {
+  min-width: 500px;
+  height: 500px;
+  overflow: hidden;
+
+  .product-img {
+    width: 100%;
+  }
+}
+
+.product-sub-img-container {
+  display: flex;
+  padding: 10px 0;
+
+  .sub-img-wrap {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    opacity: 0.5;
+    overflow: hidden;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .product-sub-img {
+    width: 100%;
+  }
+}
