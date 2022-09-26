@@ -16,14 +16,15 @@ const ProductDetailTab = () => {
     <div className="ProductDetailTab">
       <div className="detail-menu-bar">
         <ul className="tabs">
-          {TAB_TITLE.map((title, index) => {
+          {TAB_TITLE.map(tab => {
+            const { id, name } = tab;
             return (
               <li
-                key={title + index}
-                className={currentId === index + 1 ? 'tab active' : 'tab'}
-                onClick={() => tabHandler(index + 1)}
+                key={name + id}
+                className={currentId === id ? 'tab active' : 'tab'}
+                onClick={() => tabHandler(id)}
               >
-                {title}
+                {name}
               </li>
             );
           })}
@@ -38,7 +39,12 @@ const ProductDetailTab = () => {
 
 export default ProductDetailTab;
 
-const TAB_TITLE = ['상세정보', '리뷰', 'Q&A', '배송/환불'];
+const TAB_TITLE = [
+  { id: 1, name: '상세정보' },
+  { id: 2, name: '리뷰' },
+  { id: 3, name: 'Q&A' },
+  { id: 4, name: '배송/환불' },
+];
 
 const TAB_OBJ = {
   1: <DetailTab />,
