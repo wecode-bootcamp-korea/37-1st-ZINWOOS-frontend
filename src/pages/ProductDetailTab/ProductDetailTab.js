@@ -20,7 +20,7 @@ const ProductDetailTab = () => {
             return (
               <li
                 key={title + index}
-                className="tab"
+                className={currentId === index + 1 ? 'tab active' : 'tab'}
                 onClick={() => tabHandler(index + 1)}
               >
                 {title}
@@ -29,6 +29,7 @@ const ProductDetailTab = () => {
           })}
         </ul>
       </div>
+      <div className="tab-line" />
 
       {TAB_OBJ[currentId]}
     </div>

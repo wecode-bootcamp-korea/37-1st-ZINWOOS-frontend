@@ -31,29 +31,41 @@
 
   .refund-table {
     margin: 10 0px;
-    border: 1px solid black;
 
     .refund-table-head {
-      background-color: $grey-color;
-      border: 1px solid black;
+      background-color: #efefef;
 
       .refund-table-wrap {
-        width: 85vw;
-
         .table-item {
           width: 85vw;
           padding: 10px;
+          font-size: clac($font-micro * 2);
+          font-weight: 500;
+          color: $green-dark-color;
+          border: 1px solid $grey-color;
         }
       }
     }
 
     .refund-table-in {
+      text-align: center;
+
       .refund-table-tr {
+        border: 1px solid $grey-color;
+        font-size: $font-micro;
+
         .table-datas {
-          border: 1px solid black;
-          font-size: $font-small;
+          padding: 15px;
+          font-size: $font-micro;
+          border: 1px solid $grey-color;
         }
       }
     }
+  }
+
+  .refund-tip {
+    margin-top: 30px;
+    color: $grey-dark-color;
+    font-size: $font-micro;
   }
 }

@@ -42,6 +42,12 @@ const RefundTab = () => {
             })}
           </tbody>
         </table>
+
+        <p className="refund-tip">
+          배송 당일에 배송일과 모델을 변경하거나 제품 취소 시 부과되는 별도
+          비용, 수취인 부재 시나 거부 또는 주소지 및 연락처 오류로 인한 반송
+          배송비는 고객님 부담입니다.
+        </p>
       </div>
     </section>
   );
@@ -51,15 +57,15 @@ export default RefundTab;
 
 const REFUND_DATA = [
   {
-    category: 'ZINWOOS ITEMS',
+    category: 'ITEMS',
     refund: '교환/환불 불가',
   },
   {
-    category: 'ZINWOOS GOODS',
+    category: 'GOODS',
     refund: '5,000원',
   },
   {
-    category: 'ZINWOOS TIME',
+    category: 'TIME',
     refund: '교환/환불 불가',
   },
 ];

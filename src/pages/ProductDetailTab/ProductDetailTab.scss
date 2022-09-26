@@ -9,19 +9,48 @@
     .tabs {
       @include flexSort(space-around, '');
       width: 1130px;
-      border-bottom: 1px solid $grey-color;
 
       .tab {
-        margin: 30px;
+        position: relative;
+        margin: 20px;
+        padding: 0 20px;
         color: $green-dark-color;
         font-family: 'Noto Sans KR', sans-serif;
-        font-size: $font-small;
-        font-weight: 400;
+        font-size: calc($font-small / 1.2);
+        font-weight: 300;
         cursor: pointer;
 
         &:hover {
-          color: $green-dark-color;
           font-weight: 700;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 25px;
+          left: 0px;
+          width: 0;
+          height: 3px;
+          background-color: $green-light-color;
+          transition: 0.3s;
+        }
+
+        &:hover:after {
+          width: 100%;
+        }
+      }
+
+      .active {
+        font-weight: 700;
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 25px;
+          left: 0px;
+          width: 100%;
+          height: 3px;
+          background-color: $green-light-color;
         }
       }
     }
