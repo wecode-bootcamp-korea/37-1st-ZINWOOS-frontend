@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import './PriceCalculator.scss';
 
-const PriceCalculator = () => {
+const PriceCalculator = ({ price }) => {
   const [signPrice, setSignPrice] = useState(0);
   const PRICE = 20;
   const [amount, setAmount] = useState(1);

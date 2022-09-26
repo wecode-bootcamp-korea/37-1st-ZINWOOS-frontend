@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import PriceCalculator from './components/PriceCalculator';
 import ProductImg from './components/ProductImg';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
+  const params = useParams();
+  const productId = params.itemId;
+  const [product, setProduct] = useState({});
+  const { name, description, price, image_url } = product;
+
+  useEffect(() => {
+    fetch(`http://172.20.10.3:3000/items/${productId}`)
+      .then(response => response.json())
+      .then(result => {
+        setProduct(result.data[0]);
+      });
+  }, [productId]);
+
+  console.log(product);
   return (
     <div className="ProductDetail">
       <div className="product-wrap">
         <div className="product">
           <article className="product-item">
-            <ProductImg />
+            {Object.keys(product).length !== 0 && (
+              <ProductImg img={image_url} />
+            )}
             <div className="product-item-contents">
-              <h1 className="product-item-contents-title">
-                진우님과의 '1시간'
-              </h1>
-              <p className="product-item-contents-info">
-                7중 레이어 구성으로 더욱 풍성해진 코어, 쿨링 터치 기능이 있는
-                퀼팅 패턴의 커버와 푹신한 솜이 구름 위에 누운듯한 사용감을 선사
-              </p>
+              <h1 className="product-item-contents-title">{name}</h1>
+              <p className="product-item-contents-info">{description}</p>
               <ul className="product-item-contents-ship">
                 <li>택배배송</li>
                 <li>
@@ -26,7 +38,7 @@ const ProductDetail = () => {
                 </li>
                 <li>50,000원 이상 구매시 무료 / 제주,도서지역 추가 3,000원</li>
               </ul>
-              <PriceCalculator />
+              <PriceCalculator price={price} />
               <form className="product-item-contents-buttons">
                 <input
                   className="payment-button"
