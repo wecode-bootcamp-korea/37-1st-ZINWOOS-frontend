@@ -47,7 +47,7 @@ const Cart = () => {
   const [selectAll, setSelectAll] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipFee, setShipFee] = useState(3000);
-  const orderPrice = totalPrice + shipFee;
+  // const orderPrice = totalPrice + shipFee;
 
   const navigate = useNavigate();
 
@@ -75,13 +75,13 @@ const Cart = () => {
   }, [cartList]);
 
   const submitOrder = () => {
-    const orderList = cartList.filter(item => item.isChecked === 1);
+    // const orderList = cartList.filter(item => item.isChecked === 1);
     //서브밋할 때는 orderList와 orderPrice 보내주면 됨
     // console.log(cartList);
     // console.log(orderPrice);
     // console.log(orderList);
     //백엔드 통신 대비용 메모입니다.
-    const checkConfirm = window.confirm('주문하시겠?');
+    // const checkConfirm = window.confirm('주문하시겠?');
   };
 
   const selectAllCheckbox = () => {
