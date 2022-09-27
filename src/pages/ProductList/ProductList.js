@@ -7,9 +7,10 @@ const ProductList = () => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch('http://172.20.10.5:3000/posts/price?idx=2&limit=100&offset=0')
+    // fetch('http://172.20.10.5:3000/posts/price?idx=2&limit=100&offset=0')
+    fetch('./Mock/Mock.json')
       .then(res => res.json())
-      .then(data => setProduct(data.data));
+      .then(data => setProduct(data));
   }, []);
 
   return (
@@ -18,7 +19,7 @@ const ProductList = () => {
       <div className="contents">
         <div className="contents-wrapper">
           <div className="move-solt">
-            <div className="product-move"></div>
+            <div className="product-move" />
             <div className="product-sort">
               <ul className="sort">
                 <li>이름순</li>
@@ -45,11 +46,7 @@ const ProductList = () => {
           </div>
           <div className="move-btn-wrapper">
             <div className="move-btn">
-              <ul>
-                <li>
-                  <a href="#">페이지</a>
-                </li>
-              </ul>
+              <div>페이지</div>
             </div>
           </div>
         </div>
