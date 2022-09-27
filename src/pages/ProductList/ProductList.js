@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProductList.scss';
 import MainImage from './component/MainImage/MainImage';
 import ProductImage from './component/Product/ProductImage';
 
 const ProductList = () => {
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    fetch('./Mock/Mock.json')
+      .then(res => res.json())
+      .then(data => setProduct(data));
+  }, []);
+
   return (
     <div className="ProductList">
       <MainImage />
-      <div className="contents" id="tag1">
+      <div className="contents">
         <div className="contents-wrapper">
           <div className="move-solt">
-            <div className="product-move">
-              <ul>
-                {/* <li>1</li>
-                <li>2</li>
-                <li>3</li> */}
-              </ul>
-            </div>
+            <div className="product-move"></div>
             <div className="product-sort">
               <ul className="sort">
                 <li>이름순</li>
@@ -27,17 +29,25 @@ const ProductList = () => {
           </div>
           <div className="product-content">
             <div className="product-list">
-              <ProductImage />
+              {product.map(e => {
+                return (
+                  <ProductImage
+                    name={e.name}
+                    detail_image={e.detail_image}
+                    detail={e.detail}
+                    price={e.price}
+                    tags_name={e.tags_name}
+                    key={e.price}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className="move-btn-wrapper">
             <div className="move-btn">
               <ul>
                 <li>
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
+                  <a href="#">페이지</a>
                 </li>
               </ul>
             </div>
