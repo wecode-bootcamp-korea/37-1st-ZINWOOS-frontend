@@ -1,4 +1,4 @@
-@import '../../styles/variable.scss';
+@import '/src/styles/variable.scss';
 
 .Likes {
   width: 1120px;
@@ -7,9 +7,10 @@
   .title-container {
     display: flex;
     @include flexSort(space-between, '');
-    margin: 80px 0;
+    margin: 80px 0 40px 0;
 
     .likes-title {
+      color: $green-dark-color;
       font-size: 60px;
     }
 
@@ -19,53 +20,16 @@
     }
   }
 
+  .like-line {
+    width: 1120px;
+    margin: 40px 0;
+    border: 1px solid $green-dark-color;
+  }
+
   .likes-item-container {
     display: flex;
+    justify-content: left;
     flex-wrap: wrap;
     width: 1120px;
-
-    .likes-item {
-      margin-bottom: 50px;
-
-      :not(:last-child) {
-        margin-right: 10px;
-        margin-bottom: 15px;
-      }
-
-      .img-container {
-        position: relative;
-        width: calc(1120px / 4.15);
-        height: calc(1120px / 4.15);
-        overflow: hidden;
-
-        img {
-          width: 100%;
-        }
-
-        .like-out-btn {
-          width: 20px;
-          height: 20px;
-          line-height: 20px;
-          position: absolute;
-          top: 0px;
-          right: 0px;
-          font-size: 20px;
-          font-weight: 100;
-          text-align: center;
-          color: $white-color;
-          background-color: rgba(0, 0, 0, 0.2);
-        }
-      }
-
-      .likes-item-name {
-        font-size: calc($font-medium);
-        font-weight: 700;
-        margin-bottom: 10px;
-      }
-
-      .like-item-price {
-        font-size: calc($font-medium * 1.3);
-      }
-    }
   }
 }
