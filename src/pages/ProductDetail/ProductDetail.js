@@ -19,7 +19,6 @@ const ProductDetail = () => {
   }, [productId]);
 
   // `http://172.20.10.3:3000/items/${productId}`;
-
   return (
     <div className="ProductDetail">
       <div className="product-wrap">
@@ -35,22 +34,15 @@ const ProductDetail = () => {
                 <li>택배배송</li>
                 <li>
                   <span>3,000원</span>
-                  <span>(주문시 결제)</span>
+                  <span>(주문시 결제)</span>9
                 </li>
-                <li>50,000원 이상 구매시 무료 / 제주,도서지역 추가 3,000원</li>
+                <li>100,000원 이상 구매시 무료 / 제주,도서지역 추가 3,000원</li>
               </ul>
-              <PriceCalculator price={price} option_price={option_price} />
-              <form className="product-item-contents-buttons">
-                <input
-                  className="payment-button"
-                  type="button"
-                  value="결제하기"
-                />
-                <input className="cart-button" type="button" value="장바구니" />
-                <button className="heart-button">
-                  <i className="fa-regular fa-heart" />
-                </button>
-              </form>
+              <PriceCalculator
+                price={price}
+                option_price={option_price}
+                productId={productId}
+              />
             </div>
           </article>
         </div>

@@ -27,10 +27,12 @@
     &-button {
       width: 34px;
       height: 100%;
+      border-style: none;
     }
     &-input {
       width: 44px;
       height: 100%;
+      border-style: none;
       text-align: center;
     }
     input[type='number']::-webkit-inner-spin-button,
@@ -46,6 +48,32 @@
 
     .total-price {
       font-size: calc($font-micro * 2);
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    margin: calc($padding * 5) 0;
+
+    .payment-button,
+    .cart-button {
+      min-width: 215px;
+      margin-right: calc($padding/2);
+      padding: $padding calc($padding * 7);
+      color: $white-color;
+      background-color: $green-dark-color;
+      border-radius: 3px;
+      border-style: none;
+    }
+
+    .heart-button {
+      background-color: $white-color;
+      border: 1px solid $green-dark-color;
+      border-radius: 3px;
+
+      i {
+        font-size: $font-small;
+      }
     }
   }
 }
