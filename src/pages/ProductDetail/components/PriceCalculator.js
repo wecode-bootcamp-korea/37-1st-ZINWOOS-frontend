@@ -9,19 +9,24 @@ const PriceCalculator = ({ price, option_price, productId }) => {
   const [amount, setAmount] = useState(1);
   const totalPrice = (PRICE + optionPrice) * amount;
   const [optionId, setOptionId] = useState(null);
+  const PRODUCT_ID = Number(productId);
+  const [heartColor, setHeartColor] = useState(true);
 
   const amountHandler = e => {
     e.currentTarget.name === 'minus'
       ? setAmount(amount > 1 ? amount - 1 : 1)
       : setAmount(amount < 5 ? amount + 1 : amount);
   };
+
   const optionHandler = e => {
     e.target.value === '1' ? setOptionPrice(OPTION_PRICE) : setOptionPrice(0);
-    setOptionId(Number(e.target.value));
+    e.target.value === '1'
+      ? setOptionId(Number(e.target.value))
+      : setOptionId(null);
   };
 
   const addCartHandler = () => {
-    fetch('http://172.20.10.5:3000/carts', {
+    fetch('http://172.20.10.6:3000/carts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -29,7 +34,7 @@ const PriceCalculator = ({ price, option_price, productId }) => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjY0MTc5Mzg2LCJleHAiOjE2NjQ5NTY5ODZ9.C8WWs5-EhQTk7Dx1IIt_152J5IDTmCrZ8dvJdlcCsJk',
       },
       body: JSON.stringify({
-        itemId: Number(productId),
+        itemId: PRODUCT_ID,
         optionId: optionId,
         quantity: amount,
       }),
@@ -40,6 +45,39 @@ const PriceCalculator = ({ price, option_price, productId }) => {
           alert('장바구니에 상품이 담겼습니다!');
         }
       });
+  };
+
+  const addWishList = e => {
+    e.preventDefault();
+    setHeartColor(!heartColor);
+    if (heartColor === true) {
+      fetch('http://172.20.10.3:3000/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
+        },
+        body: JSON.stringify({
+          itemId: PRODUCT_ID,
+        }),
+      })
+        .then(response => response.json())
+        .then(result => console.log(result));
+    } else {
+      fetch('http://172.20.10.3:3000/likes', {
+        method: 'DELETE',
+        headers: {
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
+        },
+        body: JSON.stringify({
+          itemId: PRODUCT_ID,
+        }),
+      })
+        .then(response => response.json())
+        .then(result => console.log(result));
+    }
   };
 
   return (
@@ -72,8 +110,10 @@ const PriceCalculator = ({ price, option_price, productId }) => {
           value="장바구니"
           onClick={addCartHandler}
         />
-        <button className="heart-button">
-          <i className="fa-regular fa-heart" />
+        <button onClick={addWishList} className="heart-button">
+          <i
+            className={heartColor ? 'fa-regular fa-heart' : 'fa-solid fa-heart'}
+          />
         </button>
       </form>
     </div>
