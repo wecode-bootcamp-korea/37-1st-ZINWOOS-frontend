@@ -21,29 +21,29 @@ const Likes = () => {
   const deleteBtn = e => {
     console.log(e.target.id);
 
-    let clickId = e.target.id;
-    fetch(`http://172.20.10.3:3000/likes/${clickId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
-      },
-      body: JSON.stringify({
-        itemId: clickId,
-      }),
-    })
-    .then(
-      fetch('http://172.20.10.3:3000/likes/', {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
-      },
-    })
-      .then(response => response.json())
-      .then(result => console.log(result.data));
-    )
+    // let clickId = e.target.id;
+    // fetch(`http://172.20.10.3:3000/likes/${clickId}`, {
+    //   method: 'DELETE',
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //     Authorization:
+    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
+    //   },
+    //   body: JSON.stringify({
+    //     itemId: clickId,
+    //   }),
+    // })
+    // .then(
+    //   fetch('http://172.20.10.3:3000/likes/', {
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //     Authorization:
+    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
+    //   },
+    // })
+    //   .then(response => response.json())
+    //   .then(result => console.log(result.data));
+    // )
   };
 
   // let copy = [...likeList];
