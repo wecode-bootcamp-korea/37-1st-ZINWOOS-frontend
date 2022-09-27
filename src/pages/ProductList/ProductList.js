@@ -7,9 +7,7 @@ const ProductList = () => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch(
-      'http://172.20.10.5:3000/posts/all?idx=2&sort=price&order=DESC&limit=100&offset=0'
-    )
+    fetch('http://172.20.10.5:3000/posts/price?idx=2&limit=100&offset=0')
       .then(res => res.json())
       .then(data => setProduct(data.data));
   }, []);
