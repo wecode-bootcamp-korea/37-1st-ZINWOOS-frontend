@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from './Carousel';
 import NewItem from './NewItem';
 import './Main.scss';
 
 const Main = () => {
+  const [newList, setNewList] = useState([]);
+
+  useEffect(() => {
+    fetch('http://172.20.10.4:3000/posts/new')
+      .then(response => response.json())
+      .then(result => setNewList(result.data));
+  }, []);
+
+  console.log(newList);
+
   return (
     <div className="Main">
       <Carousel />
@@ -51,7 +61,7 @@ const Main = () => {
         </li>
       </ul>
 
-      <NewItem />
+      <NewItem itemData={newList} />
     </div>
   );
 };
