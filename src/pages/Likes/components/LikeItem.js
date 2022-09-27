@@ -10,7 +10,11 @@ const LikeItem = ({ deleteBtn, likeData }) => {
     <div className="LikeItem">
       <div className="img-container">
         <img src={detail_image} alt="관심상품 이미지" />
-        <div className="like-out-btn" id={item_id} onClick={deleteBtn}>
+        <div
+          className="like-out-btn"
+          id={item_id}
+          onClick={() => deleteBtn(item_id)}
+        >
           x
         </div>
       </div>

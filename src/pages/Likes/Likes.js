@@ -6,52 +6,77 @@ import './Likes.scss';
 const Likes = () => {
   const [likeList, setLikeList] = useState([]);
 
+  // http://172.20.10.3:3000/likes/\
+
   useEffect(() => {
-    fetch('http://172.20.10.3:3000/likes/', {
+    fetch('http://172.20.10.5:3000/likes', {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
       },
     })
       .then(res => res.json())
       .then(result => setLikeList(result.data));
   }, []);
 
-  const deleteBtn = e => {
-    console.log(e.target.id);
+  // async function delLikeItem(id) {
+  //   const response = await fetch(`http://172.20.10.5:3000/likes/${id}`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       Authorization:
+  //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
+  //     },
+  //   });
 
-    // let clickId = e.target.id;
-    // fetch(`http://172.20.10.3:3000/likes/${clickId}`, {
-    //   method: 'DELETE',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //     Authorization:
-    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
-    //   },
-    //   body: JSON.stringify({
-    //     itemId: clickId,
-    //   }),
-    // })
-    // .then(
-    //   fetch('http://172.20.10.3:3000/likes/', {
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //     Authorization:
-    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
-    //   },
-    // })
-    //   .then(response => response.json())
-    //   .then(result => console.log(result.data));
-    // )
+  //   const result = await response.json();
+  //   console.log(result);
+  // }
+
+  const deleteBtn = async id => {
+    console.log(id);
+    const response = await fetch(`http://172.20.10.5:3000/likes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
+      },
+    });
+    // const data = response.json();
+
+    console.log(response.status);
+    if (response.status === 204) {
+      alert('삭제 굳');
+      fetch(`http://172.20.10.5:3000/likes/`, {
+        headers: {
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
+        },
+      })
+        .then(res => res.json())
+        .then(result => setLikeList(result.data));
+    }
+
+    // .then(res => {
+    //   if (res.message === 'ITEM_DISLIKED') {
+    //     alert('삭제되었습니다.');
+    //     fetch(`http://172.20.10.5:3000/likes/`, {
+    //       headers: {
+    //         Authorization:
+    //           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
+    //       },
+    //     })
+    //       .then(res => res.json())
+    //       .then(data => setLikeList(data));
+    //   }
+    // });
   };
 
   // let copy = [...likeList];
   // let copy2 = copy.filter(item => item.id !== parseInt(e.target.id));
   // setLikeList(copy2);
 
-  // setLikeList(
-  //   likeList.filter(item => item.id !== parseInt(e.target.id))
   // );
 
   return (
