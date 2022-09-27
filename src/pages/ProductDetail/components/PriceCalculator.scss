@@ -19,7 +19,7 @@
     }
   }
 
-  .amount {
+  .quantity {
     width: 114px;
     height: 34px;
     border: 1px solid $grey-color;
@@ -72,7 +72,11 @@
       border-radius: 3px;
 
       i {
-        font-size: $font-small;
+        font-size: $font-medium;
+
+        &.fa-solid {
+          color: $red-color;
+        }
       }
     }
   }

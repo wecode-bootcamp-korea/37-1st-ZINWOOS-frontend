@@ -2,27 +2,24 @@ import React from 'react';
 import { useState } from 'react';
 import './PriceCalculator.scss';
 
-const PriceCalculator = ({ price, option_price, productId }) => {
-  const PRICE = Number(price);
-  const OPTION_PRICE = Number(option_price);
-  const [optionPrice, setOptionPrice] = useState(0);
-  const [amount, setAmount] = useState(1);
-  const totalPrice = (PRICE + optionPrice) * amount;
-  const [optionId, setOptionId] = useState(null);
-  const PRODUCT_ID = Number(productId);
-  const [heartColor, setHeartColor] = useState(true);
+const PriceCalculator = ({
+  optionId,
+  productId,
+  option_name,
+  optionHandler,
+  optionPrice,
+  price,
+}) => {
+  const [quantity, setQuantity] = useState(1);
+  const totalPrice = (price * 1 + optionPrice * 1) * quantity;
+  const [heartColor, setHeartColor] = useState('fa-regular fa-heart');
 
-  const amountHandler = e => {
-    e.currentTarget.name === 'minus'
-      ? setAmount(amount > 1 ? amount - 1 : 1)
-      : setAmount(amount < 5 ? amount + 1 : amount);
+  const minusQuantity = () => {
+    setQuantity(quantity > 1 ? quantity - 1 : 1);
   };
 
-  const optionHandler = e => {
-    e.target.value === '1' ? setOptionPrice(OPTION_PRICE) : setOptionPrice(0);
-    e.target.value === '1'
-      ? setOptionId(Number(e.target.value))
-      : setOptionId(null);
+  const plusQuantity = () => {
+    setQuantity(quantity < 5 ? quantity + 1 : quantity);
   };
 
   const addCartHandler = () => {
@@ -34,50 +31,35 @@ const PriceCalculator = ({ price, option_price, productId }) => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjY0MTc5Mzg2LCJleHAiOjE2NjQ5NTY5ODZ9.C8WWs5-EhQTk7Dx1IIt_152J5IDTmCrZ8dvJdlcCsJk',
       },
       body: JSON.stringify({
-        itemId: PRODUCT_ID,
+        itemId: productId,
         optionId: optionId,
-        quantity: amount,
+        quantity: quantity,
       }),
-    })
-      .then(response => response.json())
-      .then(result => {
-        if (result.message === 'Item added successfully') {
-          alert('장바구니에 상품이 담겼습니다!');
-        }
-      });
+    }).then(result => {
+      if (result.status === 201) {
+        alert('장바구니에 상품이 담겼습니다!');
+      }
+    });
   };
 
   const addWishList = e => {
     e.preventDefault();
-    setHeartColor(!heartColor);
-    if (heartColor === true) {
-      fetch('http://172.20.10.3:3000/likes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
-        },
-        body: JSON.stringify({
-          itemId: PRODUCT_ID,
-        }),
-      })
-        .then(response => response.json())
-        .then(result => console.log(result));
-    } else {
-      fetch('http://172.20.10.3:3000/likes', {
-        method: 'DELETE',
-        headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
-        },
-        body: JSON.stringify({
-          itemId: PRODUCT_ID,
-        }),
-      })
-        .then(response => response.json())
-        .then(result => console.log(result));
-    }
+    setHeartColor('fa-solid fa-heart');
+    fetch('http://172.20.10.3:3000/likes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
+      },
+      body: JSON.stringify({
+        itemId: productId,
+      }),
+    }).then(response => {
+      if (response.status === 201) {
+        alert('위시리스트에 추가되었습니다!');
+      }
+    });
   };
 
   return (
@@ -85,16 +67,20 @@ const PriceCalculator = ({ price, option_price, productId }) => {
       <div className="product-item-contents-option">
         <h2 className="product-item-contents-option-title">추가상품</h2>
         <select className="option-selector" onChange={optionHandler}>
-          <option value="null">친필사인 추가</option>
-          <option value="1">친필사인 추가(+30,000원)</option>
+          <option value="">{option_name}</option>
+          <option value="1">{option_name}(+30,000원)</option>
         </select>
       </div>
-      <div className="amount">
-        <button className="amount-button" name="minus" onClick={amountHandler}>
+      <div className="quantity">
+        <button
+          className="quantity-button"
+          name="minus"
+          onClick={minusQuantity}
+        >
           <i className="fa-solid fa-minus" />
         </button>
-        <input className="amount-input" value={amount} type="number" />
-        <button className="amount-button" name="plus" onClick={amountHandler}>
+        <input className="quantity-input" value={quantity} type="number" />
+        <button className="quantity-button" name="plus" onClick={plusQuantity}>
           <i className="fa-solid fa-plus" />
         </button>
       </div>
@@ -111,13 +97,10 @@ const PriceCalculator = ({ price, option_price, productId }) => {
           onClick={addCartHandler}
         />
         <button onClick={addWishList} className="heart-button">
-          <i
-            className={heartColor ? 'fa-regular fa-heart' : 'fa-solid fa-heart'}
-          />
+          <i className={heartColor} />
         </button>
       </form>
     </div>
   );
 };
-
 export default PriceCalculator;
