@@ -7,7 +7,7 @@ const Likes = () => {
   const [likeList, setLikeList] = useState([]);
 
   useEffect(() => {
-    fetch('http://172.20.10.3:3000/likes', {
+    fetch('http://172.20.10.3:3000/likes/', {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
@@ -20,23 +20,36 @@ const Likes = () => {
 
   const deleteBtn = e => {
     console.log(e.target.id);
-    //   fetch('http://172.20.10.3:3000/likes/' + parseInt(e.target.id), {
-    //     method: 'DELETE',
-    //     headers: {
-    //       'Content-Type': 'application/json;charset=utf-8',
-    //       Authorization:
-    //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
-    //     },
-    //     body: JSON.stringify({
-    //       itemId: itemId,
-    //     }),
-    //   });
 
-    // console.log(e.currentTarget.id);
-    // let copy = [...likeList];
-    // let copy2 = copy.filter(item => item.id !== parseInt(e.target.id));
-    // setLikeList(copy2);
+    let clickId = e.target.id;
+    fetch(`http://172.20.10.3:3000/likes/${clickId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
+      },
+      body: JSON.stringify({
+        itemId: clickId,
+      }),
+    })
+    .then(
+      fetch('http://172.20.10.3:3000/likes/', {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
+      },
+    })
+      .then(response => response.json())
+      .then(result => console.log(result.data));
+    )
   };
+
+  // let copy = [...likeList];
+  // let copy2 = copy.filter(item => item.id !== parseInt(e.target.id));
+  // setLikeList(copy2);
+
   // setLikeList(
   //   likeList.filter(item => item.id !== parseInt(e.target.id))
   // );
