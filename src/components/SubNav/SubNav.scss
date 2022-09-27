@@ -1,0 +1,48 @@
+@import '../../styles/variable.scss';
+
+.SubNav {
+  display: flex;
+  width: 1080px;
+  margin-bottom: $padding;
+  color: $grey-dark-color;
+
+  .nav-link {
+    position: relative;
+    width: 130px;
+
+    .fixed-link {
+      width: 100%;
+      padding: 0 0 6px 0;
+      color: $grey-dark-color;
+      background-color: $white-color;
+      border-style: none;
+    }
+
+    .active-link {
+      display: none;
+    }
+
+    &.active {
+      .active-links {
+        position: absolute;
+        display: block;
+
+        .active-link {
+          display: flex;
+          width: 100%;
+          margin-left: $padding;
+          padding: calc($padding/2);
+          color: $grey-dark-color;
+          background-color: $white-color;
+          border-style: none;
+
+          &:hover {
+            color: $white-color;
+            background-color: $green-dark-color;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
