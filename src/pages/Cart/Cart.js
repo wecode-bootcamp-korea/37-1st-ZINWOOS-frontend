@@ -1,117 +1,100 @@
 import { React, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './Cart.scss';
 
 const Cart = () => {
-  const data = [
-    {
-      id: 0,
-      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
-      title: '사진',
-      option: '친필 사인 추가',
-      quantity: 1,
-      price: 10000,
-      isChecked: 1,
-    },
-    {
-      id: 1,
-      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
-      title: '시간',
-      option: '친필 사인 추가',
-      quantity: 2,
-      price: 20000,
-      isChecked: 1,
-    },
-    {
-      id: 2,
-      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
-      title: '포옹',
-      option: '친필 사인 추가',
-      quantity: 3,
-      price: 30000,
-      isChecked: 1,
-    },
-    {
-      id: 3,
-      url: 'https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true',
-      title: '티셔츠',
-      option: '친필 사인 추가',
-      quantity: 1,
-      price: 40000,
-      isChecked: 1,
-    },
-  ];
-  // isChecked : 1  수정 시작!
-  const [cartList, setCartList] = useState(data);
+  const [cartList, setCartList] = useState([]);
   const [selectAll, setSelectAll] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipFee, setShipFee] = useState(3000);
-  // const orderPrice = totalPrice + shipFee;
 
-  const navigate = useNavigate();
+  // useEffect(() => {
+  //   fetch('http://172.20.10.6:3000/carts?limit=50&offset=0', {
+  //     headers: { Authorization: localStorage.getItem('token') },
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => setCartList(data.cartList));
+  // }, []);
 
   useEffect(() => {
     let checkedArr = [];
 
-    cartList.forEach(item => checkedArr.push(item.isChecked));
+    cartList.forEach(item => checkedArr.push(item.checkbox));
 
     if (checkedArr.includes(0)) {
       setSelectAll(false);
     } else {
       setSelectAll(true);
     }
-  }, [cartList]);
+  }, []);
 
   useEffect(() => {
-    const buyList = cartList.filter(item => Boolean(item.isChecked));
+    const copy = [...cartList];
+    const buyList = copy.filter(item => Boolean(item.checkbox));
+
     let price = 0;
     buyList.forEach(item => {
       price += item.quantity * item.price;
     });
-    price > 50000 ? setShipFee(0) : setShipFee(3000);
 
+    price >= 100000 ? setShipFee(0) : setShipFee(3000);
+    price === 0 && setShipFee(0);
     setTotalPrice(price);
   }, [cartList]);
 
-  const submitOrder = () => {
-    // const orderList = cartList.filter(item => item.isChecked === 1);
-    //서브밋할 때는 orderList와 orderPrice 보내주면 됨
-    // console.log(cartList);
-    // console.log(orderPrice);
-    // console.log(orderList);
-    //백엔드 통신 대비용 메모입니다.
+  const submitOrder = async () => {
+    console.log('주문하기!');
+    const orderList = cartList.filter(item => item.checkbox === 1);
+    console.log(orderList);
+    const response = await fetch('#', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+        body: JSON.stringify({
+          userId: orderList.userId,
+          itemId: orderList.id,
+          optionId: orderList.optionId,
+          quantity: orderList.quantity,
+        }),
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+
     // const checkConfirm = window.confirm('주문하시겠?');
+    //데이터 메시지가 ~~면 ~~ 하고 실패면 ~~하자 조건문.!@!@#!@#!@#13
   };
 
   const selectAllCheckbox = () => {
     let copy = [...cartList];
     if (selectAll) {
-      //true
       copy.forEach(obj => {
-        obj.isChecked = 0;
+        obj.checkbox = 0;
       });
     } else {
       copy.forEach(obj => {
-        obj.isChecked = 1;
+        obj.checkbox = 1;
       });
     }
-    setSelectAll(!selectAll); //false
+    setSelectAll(!selectAll);
   };
 
   const setQuantitiy = event => {
+    console.log((event.id + event.option_name).toString());
     const findIndex = cartList.findIndex(
-      e => e.id === Number(event.target.name)
-    );
+      e => (e.id + e.option_name).toString() === event.target.name
+    ); //
     let copy = [...cartList];
     if (findIndex > -1 && event.target.innerHTML === '+') {
       copy[findIndex] = {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity + 1,
       };
-      if (copy[findIndex].quantity !== 0) {
-        copy[findIndex].isChecked = 1;
-      }
+      // if (copy[findIndex].quantity !== 0) {
+      //   copy[findIndex].checkbox = 1;
+      // }
     } else if (
       findIndex > -1 &&
       event.target.innerHTML === '-' &&
@@ -121,9 +104,9 @@ const Cart = () => {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity - 1,
       };
-      if (copy[findIndex].quantity === 0) {
-        copy[findIndex].isChecked = 0;
-      }
+      // if (copy[findIndex].quantity === 0) {
+      //   copy[findIndex].checkbox = 0;
+      // }
     }
 
     setCartList(copy);
@@ -131,7 +114,7 @@ const Cart = () => {
 
   const handleInput = event => {
     const findIndex = cartList.findIndex(
-      e => e.id === Number(event.target.name)
+      e => String(e.id + e.option_name) === event.target.name
     );
     let copy = [...cartList];
     if (findIndex !== -1) {
@@ -143,38 +126,82 @@ const Cart = () => {
     setCartList(copy);
   };
 
-  const removeItem = () => {
-    let copy = [...cartList];
-
-    let copy2 = copy.filter(item => {
-      return Number(item.isChecked) === 0;
+  async function removeItem() {
+    const deleteItemId = cartList
+      .filter(ele => {
+        return ele.checkbox === 1;
+      })
+      .map(item => {
+        return item.id;
+      });
+    const result = deleteItemId.map(item => {
+      return item.id;
     });
+    let optionId = [];
+    deleteItemId
+      .map(ele => {
+        return ele.option_name;
+      })
+      .forEach(e => {
+        if (e === '친필 사인 추가') {
+          optionId.push(1);
+        } else {
+          optionId.push(null);
+        }
+      });
 
-    setCartList(copy2);
-  };
+    const response = await fetch(
+      `http://172.20.10.6:3000/carts?itemId=${result.join('&itemId=')}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          optionId: optionId,
+        }),
+      }
+    );
+    console.log(response);
+    console.log(optionId);
+    const data = await response.json();
+    console.log(data.message); //DELETE_SUCCESS; or INVALID_ITEM
+    if (data.message === 'DELETE_SUCCESS') {
+      const response = await fetch(
+        'http://172.20.10.6:3000/carts?limit=50&offset=0',
+        { headers: { Authorization: localStorage.getItem('token') } }
+      );
+      const data = await response.json();
+      console.log(data);
 
+      setCartList(data.cartList);
+    }
+  }
+  //데이터 아이디 수정 시작!!!@!@!@@!
   const handleCheckbox = event => {
     const findIndex = cartList.findIndex(
-      e => e.id === Number(event.target.name)
+      e => String(e.id + e.option_name) === event.target.name
     );
 
     let copy = [...cartList];
 
     if (findIndex !== -1) {
-      if (copy[findIndex].isChecked) {
+      if (copy[findIndex].checkbox) {
         copy[findIndex] = {
           ...cartList[findIndex],
-          isChecked: 0,
+          checkbox: 0,
         };
       } else {
         copy[findIndex] = {
           ...cartList[findIndex],
-          isChecked: 1,
+          checkbox: 1,
         };
       }
     }
     setCartList(copy);
   };
+
   return (
     <div className="Cart">
       <div className="container">
@@ -182,7 +209,7 @@ const Cart = () => {
           <div className="contents">
             <div className="order-page">
               <div className="title">
-                <h2>장바구니</h2>
+                <h1>장바구니</h1>
               </div>
               <div className="cart-list">
                 <table>
@@ -206,51 +233,57 @@ const Cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartList.map((item, i) => {
-                      const { id, title, option, quantity, price, isChecked } =
-                        item;
+                    {cartList?.map((item, i) => {
+                      const {
+                        id,
+                        name,
+                        option_name,
+                        quantity,
+                        price,
+                        checkbox,
+                        detail_image,
+                      } = item;
                       return (
-                        <tr key={id} className="cart-item">
+                        <tr key={id + option_name} className="cart-item">
                           <td>
                             <input
-                              name={id}
+                              name={id + option_name}
                               className="checkbox"
                               type="checkbox"
-                              checked={isChecked}
+                              checked={checkbox}
                               onChange={handleCheckbox}
                             />
                           </td>
                           <td className="product-info">
                             <span>
                               <Link to="">
-                                <img
-                                  src="https://github.com/ChoiRamsey/zinwoos/blob/main/3472392085746366512_20220920151059973.jpg?raw=true"
-                                  alt="제품사진"
-                                />
+                                <img src={detail_image} alt="제품사진" />
                               </Link>
                             </span>
                             <div>
-                              <div>{title}</div>
-                              {option && <div>{`옵션: ${option}`}</div>}
+                              <div>{name}</div>
+                              {option_name && (
+                                <div>{`옵션: ${option_name}`}</div>
+                              )}
                             </div>
                           </td>
                           <td>
                             <button
-                              name={id}
+                              name={id + option_name}
                               onClick={setQuantitiy}
                               className="count-btn"
                             >
                               -
                             </button>
                             <input
-                              name={id}
+                              name={id + option_name}
                               className="number-box"
                               type="number"
                               value={quantity}
                               onChange={handleInput}
                             />
                             <button
-                              name={id}
+                              name={id + option_name}
                               onClick={setQuantitiy}
                               className="count-btn"
                             >
@@ -275,7 +308,7 @@ const Cart = () => {
                   <ul>
                     <li>
                       <div>합계금액</div>
-                      <div>{totalPrice}</div>
+                      <div>{`${totalPrice.toLocaleString()}원`}</div>
                     </li>
                     <li>
                       <i className="fa-solid fa-minus" />
@@ -295,22 +328,18 @@ const Cart = () => {
                       <i className="fa-solid fa-equals" />
                       <div>결제 예정 금액</div>
                       <div>
-                        {totalPrice > 50000
-                          ? `${totalPrice}원`
-                          : `${totalPrice + shipFee}원`}
+                        {totalPrice > 100000
+                          ? `${totalPrice.toLocaleString()}원`
+                          : `${(totalPrice + shipFee).toLocaleString()}원`}
                       </div>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="complete-btn">
-                <button
-                  onClick={() => {
-                    navigate('/main');
-                  }}
-                >
-                  쇼핑 계속하기
-                </button>
+                <Link to="/main">
+                  <button>쇼핑 계속하기</button>
+                </Link>
                 <button onClick={submitOrder}>주문하기</button>
               </div>
             </div>
