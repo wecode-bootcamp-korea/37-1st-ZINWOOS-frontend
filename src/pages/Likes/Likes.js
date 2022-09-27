@@ -7,16 +7,39 @@ const Likes = () => {
   const [likeList, setLikeList] = useState([]);
 
   useEffect(() => {
-    fetch('/data/likeData.json')
+    fetch('http://172.20.10.3:3000/likes', {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
+      },
+    })
       .then(res => res.json())
       .then(result => setLikeList(result.data));
   }, []);
 
   const deleteBtn = e => {
-    let copy = [...likeList];
-    let copy2 = copy.filter(item => item.id !== parseInt(e.target.id));
-    setLikeList(copy2);
+    console.log(e.target.id);
+    //   fetch('http://172.20.10.3:3000/likes/' + parseInt(e.target.id), {
+    //     method: 'DELETE',
+    //     headers: {
+    //       'Content-Type': 'application/json;charset=utf-8',
+    //       Authorization:
+    //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU3ODIzLCJleHAiOjE2NjUwMzU0MjN9.6fw1xbUgtID8JMtzDYlYN1AgqKkADMIsep3zwNKPrXw',
+    //     },
+    //     body: JSON.stringify({
+    //       itemId: itemId,
+    //     }),
+    //   });
+
+    // console.log(e.currentTarget.id);
+    // let copy = [...likeList];
+    // let copy2 = copy.filter(item => item.id !== parseInt(e.target.id));
+    // setLikeList(copy2);
   };
+  // setLikeList(
+  //   likeList.filter(item => item.id !== parseInt(e.target.id))
+  // );
 
   return (
     <div className="Likes">
@@ -33,8 +56,8 @@ const Likes = () => {
           likeList.map(product => {
             return (
               <LikeItem
-                key={product.id}
-                id={product.id}
+                key={product.item_id}
+                id={product.item_id}
                 likeData={product}
                 deleteBtn={deleteBtn}
               />

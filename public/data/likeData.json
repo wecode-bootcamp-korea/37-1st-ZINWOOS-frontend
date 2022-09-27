@@ -1,7 +1,8 @@
 {
   "data": [
     {
-      "id": 1,
+      "like_id": 1,
+      "item_id": 320,
       "name": "NikeDunkLowPolaroid",
       "price": "150000.0",
       "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/main)nikedunk1.png?raw=true ",
@@ -9,7 +10,8 @@
       "checkbox": 1
     },
     {
-      "id": 2,
+      "like_id": 2,
+      "item_id": 321,
       "name": "NIKEwindbreaker",
       "price": "99000.0",
       "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/main)windbreaker1.png?raw=true",
@@ -17,7 +19,8 @@
       "checkbox": 1
     },
     {
-      "id": 3,
+      "like_id": 3,
+      "item_id": 322,
       "name": "GarminForerunner245",
       "price": "199000.0",
       "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/main)garminwatch1.png?raw=true",
@@ -25,23 +28,22 @@
       "checkbox": 1
     },
     {
-      "id": 4,
+      "like_id": 4,
+      "item_id": 323,
       "name": "Gram",
       "price": "150000.0",
-      "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/sub)gram3.png?raw=true ",
-      "quantity": 1,
-      "checkbox": 1
+      "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/sub)gram3.png?raw=true "
     },
     {
-      "id": 5,
+      "like_id": 5,
+      "item_id": 324,
       "name": "NikeDunkLowPolaroid",
       "price": "150000.0",
-      "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/main)nikedunk1.png?raw=true ",
-      "quantity": 1,
-      "checkbox": 1
+      "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/main)nikedunk1.png?raw=true "
     },
     {
-      "id": 6,
+      "like_id": 6,
+      "item_id": 325,
       "name": "NIKEwindbreaker",
       "price": "99000.0",
       "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/main)windbreaker1.png?raw=true",
@@ -49,7 +51,8 @@
       "checkbox": 1
     },
     {
-      "id": 7,
+      "like_id": 7,
+      "item_id": 326,
       "name": "GarminForerunner245",
       "price": "199000.0",
       "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/main)garminwatch1.png?raw=true",
@@ -57,7 +60,8 @@
       "checkbox": 1
     },
     {
-      "id": 8,
+      "like_id": 8,
+      "item_id": 327,
       "name": "Gram",
       "price": "150000.0",
       "detail_image": "https://github.com/ChoiRamsey/zinwoos/blob/main/MODIFY-ZINWOOS-PHOTO/sub)gram3.png?raw=true ",
