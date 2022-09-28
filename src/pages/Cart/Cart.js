@@ -16,6 +16,13 @@ const Cart = () => {
   //     .then(response => response.json())
   //     .then(data => setCartList(data.cartList));
   // }, []);
+  useEffect(() => {
+    fetch('/data/cart.json', {
+      headers: { Authorization: localStorage.getItem('token') },
+    })
+      .then(response => response.json())
+      .then(data => setCartList(data.cartList));
+  }, []);
 
   useEffect(() => {
     let checkedArr = [];
@@ -46,14 +53,14 @@ const Cart = () => {
   const submitOrder = async () => {
     console.log('주문하기!');
     const orderList = cartList.filter(item => item.checkbox === 1);
-    console.log(orderList);
+    console.log(...orderList);
     const response = await fetch('#', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
         body: JSON.stringify({
-          userId: orderList.userId,
+          userId: localStorage.getItem('token'),
           itemId: orderList.id,
           optionId: orderList.optionId,
           quantity: orderList.quantity,
@@ -82,7 +89,6 @@ const Cart = () => {
   };
 
   const setQuantitiy = event => {
-    console.log((event.id + event.option_name).toString());
     const findIndex = cartList.findIndex(
       e => (e.id + e.option_name).toString() === event.target.name
     ); //
@@ -92,9 +98,6 @@ const Cart = () => {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity + 1,
       };
-      // if (copy[findIndex].quantity !== 0) {
-      //   copy[findIndex].checkbox = 1;
-      // }
     } else if (
       findIndex > -1 &&
       event.target.innerHTML === '-' &&
@@ -104,9 +107,6 @@ const Cart = () => {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity - 1,
       };
-      // if (copy[findIndex].quantity === 0) {
-      //   copy[findIndex].checkbox = 0;
-      // }
     }
 
     setCartList(copy);
@@ -163,17 +163,15 @@ const Cart = () => {
         }),
       }
     );
-    console.log(response);
-    console.log(optionId);
+
     const data = await response.json();
-    console.log(data.message); //DELETE_SUCCESS; or INVALID_ITEM
+
     if (data.message === 'DELETE_SUCCESS') {
       const response = await fetch(
         'http://172.20.10.6:3000/carts?limit=50&offset=0',
         { headers: { Authorization: localStorage.getItem('token') } }
       );
       const data = await response.json();
-      console.log(data);
 
       setCartList(data.cartList);
     }
