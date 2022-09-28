@@ -68,7 +68,6 @@ const PriceCalculator = ({
       <div className="quantity">
         <button
           className="quantity-button"
-          name="minus"
           onClick={() => {
             setQuantity(quantity > 1 ? quantity - 1 : 1);
           }}
@@ -78,7 +77,6 @@ const PriceCalculator = ({
         <input className="quantity-input" value={quantity} type="number" />
         <button
           className="quantity-button"
-          name="plus"
           onClick={() => {
             setQuantity(quantity < max_amount ? quantity + 1 : quantity);
           }}
