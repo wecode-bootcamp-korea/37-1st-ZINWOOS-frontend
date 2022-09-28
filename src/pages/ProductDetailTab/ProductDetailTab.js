@@ -5,11 +5,18 @@ import QaTab from './components/QaTab';
 import RefundTab from './components/RefundTab';
 import './ProductDetailTab.scss';
 
-const ProductDetailTab = () => {
+const ProductDetailTab = ({ product }) => {
   const [currentId, setCurrentId] = useState(1);
 
   const tabHandler = e => {
     setCurrentId(e);
+  };
+
+  const TAB_OBJ = {
+    1: <DetailTab product={product} />,
+    2: <ReviewTab />,
+    3: <QaTab />,
+    4: <RefundTab />,
   };
 
   return (
@@ -45,10 +52,3 @@ const TAB_TITLE = [
   { id: 3, name: 'Q&A' },
   { id: 4, name: '배송/환불' },
 ];
-
-const TAB_OBJ = {
-  1: <DetailTab />,
-  2: <ReviewTab />,
-  3: <QaTab />,
-  4: <RefundTab />,
-};

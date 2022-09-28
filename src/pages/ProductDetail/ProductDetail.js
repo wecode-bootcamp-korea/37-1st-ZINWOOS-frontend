@@ -2,32 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PriceCalculator from './components/PriceCalculator';
 import ProductImg from './components/ProductImg';
-import SubNav from '../../components/SubNav/SubNav';
+import ProductDetailTab from '../ProductDetailTab/ProductDetailTab';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const params = useParams();
   const productId = params.itemId;
   const [product, setProduct] = useState({});
-  const {
-    name,
-    description,
-    price,
-    image_url,
-    option_price,
-    option_name,
-    max_amount,
-    main_category_name,
-    sub_category_name,
-  } = product;
+  const { name, description, price, image_url, option_price, option_name } =
+    product;
   const [optionPrice, setOptionPrice] = useState(0);
   const [optionId, setOptionId] = useState(null);
-
   useEffect(() => {
     fetch('/data/item.json')
       .then(response => response.json())
       .then(result => {
-        console.log(result.data[0]);
         setProduct(result.data[0]);
       });
   }, [productId]);
@@ -37,7 +26,7 @@ const ProductDetail = () => {
   const optionHandler = e => {
     if (e.target.value) {
       setOptionPrice(option_price);
-      setOptionId(e.target.value);
+      setOptionId(Number(e.target.value));
     } else {
       setOptionPrice(0);
       setOptionId(null);
@@ -47,10 +36,6 @@ const ProductDetail = () => {
   return (
     <div className="ProductDetail">
       <div className="product-wrap">
-        <SubNav
-          main_category_name={main_category_name}
-          sub_category_name={sub_category_name}
-        />
         <div className="product">
           <article className="product-item">
             {product.image_url && <ProductImg img={image_url} alt={name} />}
@@ -72,11 +57,16 @@ const ProductDetail = () => {
                 option_name={option_name}
                 optionHandler={optionHandler}
                 optionPrice={optionPrice}
-                max_amount={max_amount}
               />
             </div>
           </article>
         </div>
+        <ProductDetailTab
+          product={product}
+          // name={name}
+          // detail={detail}
+          // detail_image={detail_image}
+        />
       </div>
     </div>
   );

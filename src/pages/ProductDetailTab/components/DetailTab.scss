@@ -4,16 +4,17 @@
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  margin-bottom: 50px;
 
   .detail-main-wrap {
     .detail-main-img-wrap {
-      width: 1130px;
-      height: 850px;
+      width: 1000px;
+      height: 750px;
       background-color: $grey-color;
 
       .detail-main-img {
         position: absolute;
-        width: 100%;
+        width: 1000px;
       }
 
       .detail-main-slide {
