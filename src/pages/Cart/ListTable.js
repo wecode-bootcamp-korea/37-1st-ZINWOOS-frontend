@@ -1,18 +1,136 @@
 import { Link } from 'react-router-dom';
+import { React, useEffect, useState } from 'react';
+const ListTable = ({ cartList, setCartList }) => {
+  const [selectAll, setSelectAll] = useState(true);
 
-const ListTable = ({
-  setSelectAll,
-  selectAllCheckbox,
-  cartList,
-  setQuantitiy,
-  handleCheckbox,
-  handleInput,
-  removeItem,
-  selectAll,
-}) => {
+  useEffect(() => {
+    let checkedArr = [];
+
+    cartList.forEach(item => checkedArr.push(item.checkbox));
+
+    if (checkedArr.includes(0)) {
+      setSelectAll(false);
+    } else {
+      setSelectAll(true);
+    }
+  }, [cartList]);
+
+  const selectAllCheckbox = () => {
+    let copy = [...cartList];
+    const filteredList = copy.filter(list => {
+      return list.checkbox === 1;
+    });
+    if (copy.length === filteredList.length) {
+      copy = copy.map(item => {
+        return { ...item, checkbox: 0 };
+      });
+    } else {
+      copy = copy.map(item => {
+        return { ...item, checkbox: 1 };
+      });
+    }
+    setCartList(copy);
+    setSelectAll(!selectAll);
+  };
+  const handleCheckbox = event => {
+    const findIndex = cartList.findIndex(
+      e => String(e.id + e.option_name) === event.target.name
+    );
+
+    let copy = [...cartList];
+
+    if (findIndex !== -1) {
+      if (copy[findIndex].checkbox) {
+        copy[findIndex] = {
+          ...cartList[findIndex],
+          checkbox: 0,
+        };
+      } else {
+        copy[findIndex] = {
+          ...cartList[findIndex],
+          checkbox: 1,
+        };
+      }
+    }
+    setCartList(copy);
+  };
+  async function removeItem() {
+    const deleteItemId = cartList
+      .filter(ele => {
+        return ele.checkbox === 1;
+      })
+      .map(item => {
+        return item.id;
+      });
+
+    console.log(deleteItemId);
+    console.log(
+      `http://172.20.10.5:3000/carts?cartId=${deleteItemId.join('&cartId=')}`
+    );
+
+    const response = await fetch(
+      `http://172.20.10.5:3000/carts?cartId=${deleteItemId.join('&cartId=')}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.message === 'DELETE_SUCCESS') {
+      const response = await fetch(
+        'http://172.20.10.5:3000/carts?limit=50&offset=0',
+        { headers: { Authorization: localStorage.getItem('token') } }
+      );
+      const data = await response.json();
+
+      setCartList(data.cartList);
+    }
+  }
+
+  const setQuantitiy = event => {
+    const findIndex = cartList.findIndex(
+      e => (e.id + e.option_name).toString() === event.target.name
+    ); //
+    let copy = [...cartList];
+    if (findIndex > -1 && event.target.innerHTML === '+') {
+      copy[findIndex] = {
+        ...cartList[findIndex],
+        quantity: cartList[findIndex].quantity + 1,
+      };
+    } else if (
+      findIndex > -1 &&
+      event.target.innerHTML === '-' &&
+      cartList[findIndex].quantity > 1
+    ) {
+      copy[findIndex] = {
+        ...cartList[findIndex],
+        quantity: cartList[findIndex].quantity - 1,
+      };
+    }
+
+    setCartList(copy);
+  };
+
+  const handleInput = event => {
+    const findIndex = cartList.findIndex(
+      e => String(e.id + e.option_name) === event.target.name
+    );
+    let copy = [...cartList];
+    if (findIndex !== -1) {
+      copy[findIndex] = {
+        ...cartList[findIndex],
+        quantity: Number(event.target.value),
+      };
+    }
+    setCartList(copy);
+  };
   return (
     <>
-      {' '}
       <table>
         <caption>장바구니 상품리스트</caption>
         <thead>

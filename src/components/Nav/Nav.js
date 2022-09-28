@@ -29,13 +29,13 @@ const Nav = () => {
         <div className="nav-logo">
           <Link to="/">
             <img
-              src="https://cdn.pixabay.com/photo/2022/03/01/09/35/iceland-poppy-7040946_960_720.jpg"
+              src="https://github.com/ChoiRamsey/zinwoos/blob/main/LOGO_ZINWOOS.png?raw=true"
               alt="ZINWOOS"
             />
           </Link>
         </div>
         <div className="nav-menu">
-          <div>ZINWOOS</div>
+          <div>BRAND</div>
           <Link to="/product_list">
             <div onMouseOver={onMouseOver}>SHOP</div>
           </Link>
