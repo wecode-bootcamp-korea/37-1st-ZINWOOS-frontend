@@ -12,7 +12,7 @@ const Router = () => {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/product_detail" element={<ProductDetail />} />
+        <Route path="/product_detail/:id" element={<ProductDetail />} />
         <Route path="/product_list" element={<ProductList />} />
       </Routes>
       <Footer />

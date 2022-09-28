@@ -15,7 +15,7 @@ const MainImage = () => {
         </div>
         <div className="second-header">진우님의 체취가 가득한</div>
         <div>
-          <a href="#" className="product-move">
+          <a href="#tag" className="scroll-move">
             제품 바로보기
           </a>
         </div>

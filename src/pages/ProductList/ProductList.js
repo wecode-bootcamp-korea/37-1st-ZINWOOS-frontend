@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './ProductList.scss';
 import MainImage from './component/MainImage/MainImage';
 import ProductImage from './component/Product/ProductImage';
+import SubNav from '../../components/SubNav/SubNav';
+import Button from './component/Button/Button';
 
 const ProductList = () => {
   const [product, setProduct] = useState([]);
@@ -10,16 +12,22 @@ const ProductList = () => {
     // fetch('http://172.20.10.5:3000/posts/price?idx=2&limit=100&offset=0')
     fetch('./Mock/Mock.json')
       .then(res => res.json())
-      .then(data => setProduct(data));
+      .then(data => {
+        console.log(data);
+        setProduct(data);
+      });
   }, []);
 
   return (
     <div className="ProductList">
       <MainImage />
+      <div id="tag" />
       <div className="contents">
         <div className="contents-wrapper">
           <div className="move-solt">
-            <div className="product-move" />
+            <div className="product-move">
+              <SubNav />
+            </div>
             <div className="product-sort">
               <ul className="sort">
                 <li>이름순</li>
@@ -31,22 +39,13 @@ const ProductList = () => {
           <div className="product-content">
             <div className="product-list">
               {product.map(e => {
-                return (
-                  <ProductImage
-                    name={e.items_name}
-                    detail_image={e.detail_image}
-                    detail={e.detail}
-                    price={e.price}
-                    tags_name={e.tags_name}
-                    key={e.price}
-                  />
-                );
+                return <ProductImage product={e} key={e.items_id} />;
               })}
             </div>
           </div>
           <div className="move-btn-wrapper">
             <div className="move-btn">
-              <div>페이지</div>
+              <Button />
             </div>
           </div>
         </div>
