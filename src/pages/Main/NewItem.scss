@@ -1,7 +1,5 @@
 @import '../../styles/variable.scss';
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@100;300;400;700;900&display=swap');
-
 .NewItem {
   width: 100vw;
   height: auto;
@@ -34,12 +32,10 @@
         width: 500px;
         height: 500px;
         margin-bottom: 30px;
-        background-color: aqua;
         overflow: hidden;
 
         .product-image {
           height: 100%;
-          transform: translate(-60px, 0);
         }
       }
       .New-product-title {
