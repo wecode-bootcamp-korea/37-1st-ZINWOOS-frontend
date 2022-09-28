@@ -8,7 +8,7 @@ const Cart = () => {
   const [cartList, setCartList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipFee, setShipFee] = useState(3000);
-  console.log(cartList);
+
   useEffect(() => {
     fetch('http://172.20.10.5:3000/carts?limit=50&offset=0', {
       headers: { Authorization: localStorage.getItem('token') },
@@ -45,9 +45,6 @@ const Cart = () => {
       .map(item => {
         return item.id;
       });
-
-    console.log(orderList);
-
     const response = await fetch(
       `http://172.20.10.5:3000/orders?cartId=${orderList.join('&cartId=')}`,
       {
@@ -61,7 +58,7 @@ const Cart = () => {
     const data = await response.json();
     if (response.status === 201) {
       alert('주문성공');
-      console.log(data);
+      alert(data);
       // 메인페이지로 이동
     }
   };

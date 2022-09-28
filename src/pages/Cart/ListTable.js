@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { React, useEffect, useState } from 'react';
+
 const ListTable = ({ cartList, setCartList }) => {
   const [selectAll, setSelectAll] = useState(true);
 
@@ -62,12 +63,6 @@ const ListTable = ({ cartList, setCartList }) => {
       .map(item => {
         return item.id;
       });
-
-    console.log(deleteItemId);
-    console.log(
-      `http://172.20.10.5:3000/carts?cartId=${deleteItemId.join('&cartId=')}`
-    );
-
     const response = await fetch(
       `http://172.20.10.5:3000/carts?cartId=${deleteItemId.join('&cartId=')}`,
       {
