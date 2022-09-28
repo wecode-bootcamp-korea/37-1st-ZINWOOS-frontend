@@ -1,8 +1,6 @@
 @import '../../styles/variable.scss';
 
 .Main {
-  margin-top: 60px;
-
   .main-title {
     @include flexSort(center, center);
     margin-top: 100px;

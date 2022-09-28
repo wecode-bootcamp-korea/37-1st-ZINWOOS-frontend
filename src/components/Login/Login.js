@@ -28,7 +28,7 @@ const Login = ({ modalLogin, setShowLogin }) => {
 
   const handleLogin = e => {
     e.preventDefault();
-    fetch('https://6fbe-211-106-114-186.jp.ngrok.io/users/signin', {
+    fetch('http://172.20.10.5:3000/users/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify({
@@ -51,7 +51,7 @@ const Login = ({ modalLogin, setShowLogin }) => {
 
   const handleSignUp = e => {
     e.preventDefault();
-    fetch('https://6fbe-211-106-114-186.jp.ngrok.io/users/signup', {
+    fetch('http://172.20.10.5:3000/users/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify({
