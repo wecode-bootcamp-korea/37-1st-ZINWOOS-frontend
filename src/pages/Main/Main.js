@@ -12,8 +12,6 @@ const Main = () => {
       .then(result => setNewList(result.data));
   }, []);
 
-  console.log(newList);
-
   return (
     <div className="Main">
       <Carousel />

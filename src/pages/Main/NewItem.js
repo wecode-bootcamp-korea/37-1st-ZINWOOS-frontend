@@ -2,7 +2,6 @@ import React from 'react';
 import './NewItem.scss';
 
 const NewItem = ({ itemData }) => {
-  // console.log(itemData);
   return (
     <section className="NewItem">
       <h1 className="New-sub-title">ZINWOOS New Product</h1>
@@ -15,7 +14,7 @@ const NewItem = ({ itemData }) => {
               <div className="New-product-image">
                 <img
                   className="product-image"
-                  src={item.image_URL}
+                  src={item.image_URL[0]}
                   alt={item.description}
                 />
               </div>
