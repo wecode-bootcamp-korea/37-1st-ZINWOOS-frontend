@@ -16,6 +16,7 @@ const Cart = () => {
   //     .then(response => response.json())
   //     .then(data => setCartList(data.cartList));
   // }, []);
+  //위는 백엔드 API 통신 && 아래는 목데이터 사용 테스트용
   useEffect(() => {
     fetch('/data/cart.json', {
       headers: { Authorization: localStorage.getItem('token') },
@@ -34,7 +35,7 @@ const Cart = () => {
     } else {
       setSelectAll(true);
     }
-  }, []);
+  }, [cartList]);
 
   useEffect(() => {
     const copy = [...cartList];
@@ -51,9 +52,8 @@ const Cart = () => {
   }, [cartList]);
 
   const submitOrder = async () => {
-    console.log('주문하기!');
     const orderList = cartList.filter(item => item.checkbox === 1);
-    console.log(...orderList);
+
     const response = await fetch('#', {
       method: 'POST',
       headers: {
@@ -68,8 +68,7 @@ const Cart = () => {
       },
     });
     const data = await response.json();
-    console.log(data);
-
+    // 기능구현중
     // const checkConfirm = window.confirm('주문하시겠?');
     //데이터 메시지가 ~~면 ~~ 하고 실패면 ~~하자 조건문.!@!@#!@#!@#13
   };
