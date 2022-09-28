@@ -13,7 +13,6 @@ const ProductList = () => {
     fetch('./Mock/Mock.json')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setProduct(data);
       });
   }, []);
