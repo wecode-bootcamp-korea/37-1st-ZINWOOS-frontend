@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ListTable from './ListTable';
 
 import './Cart.scss';
 
@@ -78,15 +79,19 @@ const Cart = () => {
 
   const selectAllCheckbox = () => {
     let copy = [...cartList];
-    if (selectAll) {
-      copy.forEach(obj => {
-        obj.checkbox = 0;
+    const filteredList = copy.filter(list => {
+      return list.checkbox === 1;
+    });
+    if (copy.length === filteredList.length) {
+      copy = copy.map(item => {
+        return { ...item, checkbox: 0 };
       });
     } else {
-      copy.forEach(obj => {
-        obj.checkbox = 1;
+      copy = copy.map(item => {
+        return { ...item, checkbox: 1 };
       });
     }
+    setCartList(copy);
     setSelectAll(!selectAll);
   };
 
@@ -136,33 +141,20 @@ const Cart = () => {
       .map(item => {
         return item.id;
       });
-    const result = deleteItemId.map(item => {
-      return item.id;
-    });
-    let optionId = [];
-    deleteItemId
-      .map(ele => {
-        return ele.option_name;
-      })
-      .forEach(e => {
-        if (e === '친필 사인 추가') {
-          optionId.push(1);
-        } else {
-          optionId.push(null);
-        }
-      });
+
+    console.log(deleteItemId);
+    console.log(
+      `http://172.20.10.6:3000/carts?cartId=${deleteItemId.join('&cartId=')}`
+    );
 
     const response = await fetch(
-      `http://172.20.10.6:3000/carts?itemId=${result.join('&itemId=')}`,
+      `http://172.20.10.6:3000/carts?cartId=${deleteItemId.join('&cartId=')}`,
       {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: localStorage.getItem('token'),
         },
-        body: JSON.stringify({
-          optionId: optionId,
-        }),
       }
     );
 
@@ -212,6 +204,16 @@ const Cart = () => {
                 <h1>장바구니</h1>
               </div>
               <div className="cart-list">
+                <ListTable
+                  selectAll={selectAll}
+                  setSelectAll={setSelectAll}
+                  selectAllCheckbox={selectAllCheckbox}
+                  cartList={cartList}
+                  handleCheckbox={handleCheckbox}
+                  setQuantitiy={setQuantitiy}
+                  handleInput={handleInput}
+                  removeItem={removeItem}
+                />
                 <table>
                   <caption>장바구니 상품리스트</caption>
                   <thead>
