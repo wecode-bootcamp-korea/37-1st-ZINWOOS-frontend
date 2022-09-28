@@ -68,9 +68,12 @@ const Cart = () => {
       },
     });
     const data = await response.json();
-    // 기능구현중
-    // const checkConfirm = window.confirm('주문하시겠?');
-    //데이터 메시지가 ~~면 ~~ 하고 실패면 ~~하자 조건문.!@!@#!@#!@#13
+    if (data.message === 'SUCCESS') {
+      // 기능구현중
+      //데이터 메시지가 ~~면 ~~ 하고 실패면 ~~하자 조건문.!@!@#!@#!@#13
+      // alert 주문되었습니다.
+      // 메인페이지로 이동.
+    }
   };
 
   const selectAllCheckbox = () => {
