@@ -29,13 +29,13 @@ const Nav = () => {
         <div className="nav-logo">
           <Link to="/">
             <img
-              src="https://cdn.pixabay.com/photo/2022/03/01/09/35/iceland-poppy-7040946_960_720.jpg"
+              src="https://github.com/ChoiRamsey/zinwoos/blob/main/LOGO_ZINWOOS.png?raw=true"
               alt="ZINWOOS"
             />
           </Link>
         </div>
         <div className="nav-menu">
-          <div>ZINWOOS</div>
+          <div>BRAND</div>
           <Link to="/product_list">
             <div onMouseOver={onMouseOver}>SHOP</div>
           </Link>
@@ -44,16 +44,19 @@ const Nav = () => {
         </div>
         <div className="nav-control">
           {localStorage.getItem('token') ? (
-            <div className="logout-tab" onClick={getLogout}>
+            <div className="nav-right-tab" onClick={getLogout}>
               Log out
             </div>
           ) : (
-            <div className="login-tab" onClick={modalLogin}>
+            <div className="nav-right-tab" onClick={modalLogin}>
               Login & SignUp
             </div>
           )}
           <Link to="#">
-            <div className="ship-tab">주문배송</div>
+            <div className="nav-right-tab">관심상품</div>
+          </Link>
+          <Link to="#">
+            <div className="nav-right-tab">주문배송</div>
           </Link>
           <Link to="/cart">
             <div>장바구니</div>
