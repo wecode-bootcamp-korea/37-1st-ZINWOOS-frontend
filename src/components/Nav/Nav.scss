@@ -23,9 +23,7 @@
     z-index: 9999;
 
     .nav-logo {
-      width: 100px;
-      height: 100%;
-      background-color: white;
+      width: 120px;
 
       img {
         width: 100%;
@@ -46,33 +44,18 @@
 
     .nav-control {
       @include flexSort(space-around, center);
-      width: 270px;
+      width: 300px;
       height: 61px;
+      font-size: $font-micro;
 
       a {
         text-decoration: none;
         color: black;
       }
 
-      .login-tab:after {
-        content: '|';
-        float: right;
-        display: block;
-        padding: 0px 10px;
-      }
-
-      .logout-tab:after {
-        content: '|';
-        float: right;
-        display: block;
-        padding: 0px 10px;
-      }
-
-      .ship-tab:after {
-        content: '|';
-        float: right;
-        display: block;
-        padding: 0px 7px;
+      .nav-right-tab {
+        padding-right: 11px;
+        border-right: 1px solid black;
       }
 
       div:hover {
