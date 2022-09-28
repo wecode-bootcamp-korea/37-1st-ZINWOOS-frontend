@@ -3,7 +3,7 @@
 .SubNav {
   display: flex;
   width: 1080px;
-  margin-bottom: $padding;
+  margin: 0 0 $padding 15px;
   color: $grey-dark-color;
 
   .nav-link {
