@@ -9,18 +9,11 @@ const PriceCalculator = ({
   optionHandler,
   optionPrice,
   price,
+  max_amount,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const totalPrice = (price * 1 + optionPrice * 1) * quantity;
-  const [heartColor, setHeartColor] = useState('fa-regular fa-heart');
-
-  const minusQuantity = () => {
-    setQuantity(quantity > 1 ? quantity - 1 : 1);
-  };
-
-  const plusQuantity = () => {
-    setQuantity(quantity < 5 ? quantity + 1 : quantity);
-  };
+  const [wishList, setWishList] = useState(false);
 
   const addCartHandler = () => {
     fetch('http://172.20.10.6:3000/carts', {
@@ -44,7 +37,8 @@ const PriceCalculator = ({
 
   const addWishList = e => {
     e.preventDefault();
-    setHeartColor('fa-solid fa-heart');
+    setWishList(!wishList);
+    // setHeartColor('fa-solid fa-heart');
     fetch('http://172.20.10.3:3000/likes', {
       method: 'POST',
       headers: {
@@ -75,12 +69,20 @@ const PriceCalculator = ({
         <button
           className="quantity-button"
           name="minus"
-          onClick={minusQuantity}
+          onClick={() => {
+            setQuantity(quantity > 1 ? quantity - 1 : 1);
+          }}
         >
           <i className="fa-solid fa-minus" />
         </button>
         <input className="quantity-input" value={quantity} type="number" />
-        <button className="quantity-button" name="plus" onClick={plusQuantity}>
+        <button
+          className="quantity-button"
+          name="plus"
+          onClick={() => {
+            setQuantity(quantity < max_amount ? quantity + 1 : quantity);
+          }}
+        >
           <i className="fa-solid fa-plus" />
         </button>
       </div>
@@ -96,8 +98,14 @@ const PriceCalculator = ({
           value="장바구니"
           onClick={addCartHandler}
         />
-        <button onClick={addWishList} className="heart-button">
-          <i className={heartColor} />
+        <button
+          disabled={wishList}
+          onClick={addWishList}
+          className="heart-button"
+        >
+          <i
+            className={!wishList ? 'fa-regular fa-heart' : 'fa-solid fa-heart'}
+          />
         </button>
       </form>
     </div>

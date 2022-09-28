@@ -8,13 +8,20 @@ const ProductDetail = () => {
   const params = useParams();
   const productId = params.itemId;
   const [product, setProduct] = useState({});
-  const { name, description, price, image_url, option_price, option_name } =
-    product;
+  const {
+    name,
+    description,
+    price,
+    image_url,
+    option_price,
+    option_name,
+    max_amount,
+  } = product;
   const [optionPrice, setOptionPrice] = useState(0);
   const [optionId, setOptionId] = useState(null);
 
   useEffect(() => {
-    fetch('/data/item.json')
+    fetch(`http://172.20.10.3:3000/items/${productId}`)
       .then(response => response.json())
       .then(result => {
         setProduct(result.data[0]);
@@ -57,6 +64,7 @@ const ProductDetail = () => {
                 option_name={option_name}
                 optionHandler={optionHandler}
                 optionPrice={optionPrice}
+                max_amount={max_amount}
               />
             </div>
           </article>
