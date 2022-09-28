@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PriceCalculator from './components/PriceCalculator';
 import ProductImg from './components/ProductImg';
+import SubNav from '../../components/SubNav/SubNav';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
@@ -16,14 +17,17 @@ const ProductDetail = () => {
     option_price,
     option_name,
     max_amount,
+    main_category_name,
+    sub_category_name,
   } = product;
   const [optionPrice, setOptionPrice] = useState(0);
   const [optionId, setOptionId] = useState(null);
 
   useEffect(() => {
-    fetch(`http://172.20.10.3:3000/items/${productId}`)
+    fetch('/data/item.json')
       .then(response => response.json())
       .then(result => {
+        console.log(result.data[0]);
         setProduct(result.data[0]);
       });
   }, [productId]);
@@ -33,7 +37,7 @@ const ProductDetail = () => {
   const optionHandler = e => {
     if (e.target.value) {
       setOptionPrice(option_price);
-      setOptionId(Number(e.target.value));
+      setOptionId(e.target.value);
     } else {
       setOptionPrice(0);
       setOptionId(null);
@@ -43,6 +47,10 @@ const ProductDetail = () => {
   return (
     <div className="ProductDetail">
       <div className="product-wrap">
+        <SubNav
+          main_category_name={main_category_name}
+          sub_category_name={sub_category_name}
+        />
         <div className="product">
           <article className="product-item">
             {product.image_url && <ProductImg img={image_url} alt={name} />}

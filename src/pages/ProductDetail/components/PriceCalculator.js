@@ -16,7 +16,7 @@ const PriceCalculator = ({
   const [wishList, setWishList] = useState(false);
 
   const addCartHandler = () => {
-    fetch('http://172.20.10.6:3000/carts', {
+    fetch('http://172.20.10.5:3000/carts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -34,7 +34,6 @@ const PriceCalculator = ({
       }
     });
   };
-
   const addWishList = e => {
     e.preventDefault();
     setWishList(!wishList);
