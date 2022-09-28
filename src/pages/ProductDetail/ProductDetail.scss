@@ -3,13 +3,13 @@
 .ProductDetail {
   @include flexSort(flex-start, center);
   flex-direction: column;
-  margin-top: 60px;
   padding: calc($padding * 3);
   background-color: $green-light-color;
 
   .product-wrap {
     width: 1080px;
     padding: calc($padding * 4) calc($padding * 2) 0 calc($padding * 2);
+    margin-top: calc($padding * 8);
     background-color: $white-color;
   }
 
@@ -23,10 +23,10 @@
       &-contents {
         padding: 0 0 0 calc($padding * 2);
 
-        button,
-        input {
-          border-style: none;
-        }
+        // button,
+        // input {
+        //   border-style: none;
+        // }
 
         &-title {
           color: $green-dark-color;
@@ -51,31 +51,6 @@
 
           li {
             margin-right: $padding;
-          }
-        }
-
-        &-buttons {
-          display: flex;
-          margin: calc($padding * 5) 0;
-
-          .payment-button,
-          .cart-button {
-            min-width: 215px;
-            margin-right: calc($padding/2);
-            padding: $padding calc($padding * 7);
-            color: $white-color;
-            background-color: $green-dark-color;
-            border-radius: 3px;
-          }
-
-          .heart-button {
-            background-color: $white-color;
-            border: 1px solid $green-dark-color;
-            border-radius: 3px;
-
-            i {
-              font-size: $font-small;
-            }
           }
         }
       }
