@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PriceCalculator from './components/PriceCalculator';
 import ProductImg from './components/ProductImg';
+import ProductDetailTab from '../ProductDetailTab/ProductDetailTab';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
@@ -12,7 +13,6 @@ const ProductDetail = () => {
     product;
   const [optionPrice, setOptionPrice] = useState(0);
   const [optionId, setOptionId] = useState(null);
-
   useEffect(() => {
     fetch('/data/item.json')
       .then(response => response.json())
@@ -61,6 +61,12 @@ const ProductDetail = () => {
             </div>
           </article>
         </div>
+        <ProductDetailTab
+          product={product}
+          // name={name}
+          // detail={detail}
+          // detail_image={detail_image}
+        />
       </div>
     </div>
   );

@@ -5,9 +5,8 @@
   margin-top: 50px;
 
   .qnA-wrap {
-    width: 1130px;
+    width: 950px;
     height: 55vw;
-    // background-color: $green-light-color;
 
     .review-title-wrap {
       @include flexSort(space-between, center);

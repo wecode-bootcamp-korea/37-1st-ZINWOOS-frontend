@@ -3,8 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;500;700&display=swap');
 
 .ProductDetailTab {
+  margin-top: 50px;
+
   .detail-menu-bar {
     @include flexSort(center, '');
+    padding-top: 50px;
+    border-top: 1px solid $grey-color;
 
     .tabs {
       @include flexSort(space-around, '');
