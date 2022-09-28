@@ -1,13 +1,12 @@
 import React from 'react';
-// import Carousel from './Carousel';
-// import NewItem from './NewItem';
-import Likes from '../Likes/Likes';
+import Carousel from './Carousel';
+import NewItem from './NewItem';
 import './Main.scss';
 
 const Main = () => {
   return (
     <div className="Main">
-      {/* <Carousel />
+      <Carousel />
       <h1 className="main-title">#함께하는진우님</h1>
       <p className="main-content">
         우리는 많은 것들과 더불어 살고 있습니다. <br />
@@ -52,8 +51,7 @@ const Main = () => {
         </li>
       </ul>
 
-      <NewItem /> */}
-      <Likes />
+      <NewItem />
     </div>
   );
 };

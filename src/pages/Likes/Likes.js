@@ -6,10 +6,8 @@ import './Likes.scss';
 const Likes = () => {
   const [likeList, setLikeList] = useState([]);
 
-  // http://172.20.10.3:3000/likes/\
-
   useEffect(() => {
-    fetch('http://172.20.10.5:3000/likes', {
+    fetch('/data/likeData.json', {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization:
@@ -20,21 +18,8 @@ const Likes = () => {
       .then(result => setLikeList(result.data));
   }, []);
 
-  // async function delLikeItem(id) {
-  //   const response = await fetch(`http://172.20.10.5:3000/likes/${id}`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       Authorization:
-  //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
-  //     },
-  //   });
-
-  //   const result = await response.json();
-  //   console.log(result);
-  // }
-
+  // 삭제 버튼
   const deleteBtn = async id => {
-    console.log(id);
     const response = await fetch(`http://172.20.10.5:3000/likes/${id}`, {
       method: 'DELETE',
       headers: {
@@ -43,11 +28,9 @@ const Likes = () => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
       },
     });
-    // const data = response.json();
 
-    console.log(response.status);
     if (response.status === 204) {
-      alert('삭제 굳');
+      alert('관심상품에서 삭제했습니다');
       fetch(`http://172.20.10.5:3000/likes/`, {
         headers: {
           Authorization:
@@ -57,27 +40,7 @@ const Likes = () => {
         .then(res => res.json())
         .then(result => setLikeList(result.data));
     }
-
-    // .then(res => {
-    //   if (res.message === 'ITEM_DISLIKED') {
-    //     alert('삭제되었습니다.');
-    //     fetch(`http://172.20.10.5:3000/likes/`, {
-    //       headers: {
-    //         Authorization:
-    //           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
-    //       },
-    //     })
-    //       .then(res => res.json())
-    //       .then(data => setLikeList(data));
-    //   }
-    // });
   };
-
-  // let copy = [...likeList];
-  // let copy2 = copy.filter(item => item.id !== parseInt(e.target.id));
-  // setLikeList(copy2);
-
-  // );
 
   return (
     <div className="Likes">
@@ -95,7 +58,6 @@ const Likes = () => {
             return (
               <LikeItem
                 key={product.item_id}
-                id={product.item_id}
                 likeData={product}
                 deleteBtn={deleteBtn}
               />
