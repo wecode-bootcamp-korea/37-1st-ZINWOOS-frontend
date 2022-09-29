@@ -79,7 +79,12 @@ const PriceCalculator = ({
         >
           <i className="fa-solid fa-minus" />
         </button>
-        <input className="quantity-input" value={quantity} type="number" />
+        <input
+          className="quantity-input"
+          value={quantity}
+          type="number"
+          readOnly
+        />
         <button className="quantity-button" name="plus" onClick={plusQuantity}>
           <i className="fa-solid fa-plus" />
         </button>
