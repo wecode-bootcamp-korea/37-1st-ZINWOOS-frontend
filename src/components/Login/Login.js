@@ -28,7 +28,7 @@ const Login = ({ modalLogin, setShowLogin }) => {
 
   const handleLogin = e => {
     e.preventDefault();
-    fetch('http://172.20.10.5:3000/users/signin', {
+    fetch('http://172.20.10.3:3000/users/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify({
@@ -51,7 +51,7 @@ const Login = ({ modalLogin, setShowLogin }) => {
 
   const handleSignUp = e => {
     e.preventDefault();
-    fetch('http://172.20.10.5:3000/users/signup', {
+    fetch('http://172.20.10.3:3000/users/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify({
@@ -84,7 +84,11 @@ const Login = ({ modalLogin, setShowLogin }) => {
             <i className="fa-solid fa-x" />
           </button>
         </div>
-        <h1>ZINWOOS</h1>
+        <img
+          className="login-logo"
+          src="https://github.com/ChoiRamsey/zinwoos/blob/main/LOGO_ZINWOOS(%E1%84%89%E1%85%AE%E1%84%8C%E1%85%A5%E1%86%BC).png?raw=true"
+          alt="zinwoos logo"
+        />
         <p>지누스 회원이라면 계정으로 로그인 하세요</p>
         <form onSubmit={submitValue}>
           <div className="input-container">
@@ -124,7 +128,7 @@ const Login = ({ modalLogin, setShowLogin }) => {
               </>
             )}
           </div>
-          <div>
+          <div className="sign-inup-btn">
             {typeOfForm === '로그인' ? (
               <button disabled={!isLoginValid} onClick={handleLogin}>
                 로그인
