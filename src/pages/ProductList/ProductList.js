@@ -6,28 +6,19 @@ import ProductImage from './component/Product/ProductImage';
 
 const ProductList = () => {
   const [product, setProduct] = useState([]);
+  const [nameorder, setNameOrder] = useState('ASC');
   const params = useParams();
   const mainId = params;
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const offset = 0;
-  // const limit = 12;
-  // console.log(mainId);
+
   useEffect(() => {
     fetch(
-      `http://172.20.10.5:3000/posts/${mainId.id}?idx=${mainId.id2}&sort=items.name&order=ASC&limit=100&offset=0`
+      `http://172.20.10.5:3000/posts/${mainId.id}?idx=${mainId.id2}&sort=items.name&order=${nameorder}&limit=100&offset=0`
     )
-      // fetch('./Mock/Mock.json')
       .then(res => res.json())
       .then(data => {
-        // console.log(data.data);
         setProduct(data.data);
       });
   }, [mainId]);
-
-  // const movePage = pageNumber => {
-  //   searchParams.set('offset', (pageNumber - 1) * 12);
-  //   setSearchParams(searchParams);
-  // };
 
   return (
     <div className="ProductList">
