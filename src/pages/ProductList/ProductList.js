@@ -14,7 +14,7 @@ const ProductList = () => {
   useEffect(() => {
     if (Number(mainId.id2) !== 0) {
       fetch(
-        `http://172.20.10.5:3000/posts/${mainId.id}?${
+        `http://3.38.97.125:3000/items/${mainId.id}?${
           mainId.id2
         }&sort=${sort}&order=${order ? 'ASC' : 'DESC'}&limit=100&offset=0`
       )
@@ -24,7 +24,7 @@ const ProductList = () => {
         });
     } else {
       fetch(
-        `http://172.20.10.5:3000/posts/${mainId.id}?sort=${sort}&order=${
+        `http://3.38.97.125:3000/items/${mainId.id}?sort=${sort}&order=${
           order ? 'ASC' : 'DESC'
         }&limit=100&offset=0`
       )

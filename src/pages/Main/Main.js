@@ -7,9 +7,11 @@ const Main = () => {
   const [newList, setNewList] = useState([]);
 
   useEffect(() => {
-    fetch('http://172.20.10.4:3000/posts/new')
+    fetch('http://3.38.97.125:3000/posts/new')
       .then(response => response.json())
-      .then(result => setNewList(result.data));
+      .then(result => {
+        setNewList(result.data);
+      });
   }, []);
 
   return (

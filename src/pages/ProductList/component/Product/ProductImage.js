@@ -13,7 +13,7 @@ const ProductImage = ({ product }) => {
   return (
     <div className="ProductImage">
       <div className="thumb">
-        <Link key={items_name} to={`/product_detail/${items_id}}`}>
+        <Link key={items_name} to={`/product_detail/${items_id}`}>
           <img src={detail_image} alt={items_name} className="model" />
         </Link>
       </div>

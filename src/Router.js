@@ -7,10 +7,12 @@ import Main from './pages/Main/Main';
 import Footer from './components/Footer/Footer';
 import Cart from './pages/Cart/Cart';
 import Likes from './pages/Likes/Likes';
+import ScrollToTop from './components/Nav/ScrollToTop';
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />

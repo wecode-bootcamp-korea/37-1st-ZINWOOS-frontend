@@ -61,10 +61,10 @@ const ListTable = ({ cartList, setCartList }) => {
         return ele.checkbox === 1;
       })
       .map(item => {
-        return item.itemId;
+        return item.cartId;
       });
     const response = await fetch(
-      `http://172.20.10.5:3000/carts?cartId=${deleteItemId.join('&cartId=')}`,
+      `http://3.38.97.125:3000/carts?cartId=${deleteItemId.join('&cartId=')}`,
       {
         method: 'DELETE',
         headers: {
@@ -78,7 +78,7 @@ const ListTable = ({ cartList, setCartList }) => {
 
     if (data.message === 'DELETE_SUCCESS') {
       const response = await fetch(
-        'http://172.20.10.3:3000/carts?limit=50&offset=0',
+        'http://3.38.97.125:3000/carts?limit=50&offset=0',
         { headers: { Authorization: localStorage.getItem('token') } }
       );
       const data = await response.json();
@@ -98,7 +98,7 @@ const ListTable = ({ cartList, setCartList }) => {
         quantity: cartList[findIndex].quantity + 1,
       };
 
-      const response = await fetch('http://172.20.10.3:3000/carts/plus', {
+      const response = await fetch('http://3.38.97.125:3000/carts/plus', {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: localStorage.getItem('token'),
@@ -120,7 +120,7 @@ const ListTable = ({ cartList, setCartList }) => {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity - 1,
       };
-      const response = await fetch('http://172.20.10.3:3000/carts/minus', {
+      const response = await fetch('http://3.38.97.125:3000/carts/minus', {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: localStorage.getItem('token'),
@@ -229,10 +229,10 @@ const ListTable = ({ cartList, setCartList }) => {
                     +
                   </button>
                 </td>
-                <td>{price}</td>
+                <td>{price.toLocaleString()}</td>
                 <td>지누쓰마음</td>
                 <td>무료배송</td>
-                <td>{quantity * price}</td>
+                <td>`${(quantity * price).toLocaleString()}원`</td>
               </tr>
             );
           })}
