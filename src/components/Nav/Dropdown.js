@@ -12,9 +12,9 @@ const Dropdown = ({ onMouseOut, onMouseOver, isHovering }) => {
           <div className="main-cat-name">ZINWOOS ITEMS</div>
           <div className="sub-cat">
             <ul>
-              <li>호로록</li>
-              <li>후루룩</li>
-              <li>휘리릭</li>
+              <li>CLOTHING & ACCESSORIES</li>
+              <li>DIGITALS</li>
+              <li>BOOKS</li>
             </ul>
           </div>
         </li>
@@ -22,19 +22,17 @@ const Dropdown = ({ onMouseOut, onMouseOver, isHovering }) => {
           <div className="main-cat-name">ZINWOOS GOODS</div>
           <div className="sub-cat">
             <ul>
-              <li>제주도</li>
-              <li>조하</li>
-              <li>후루룩</li>
+              <li>STICKERS</li>
+              <li>PHOTO CARD</li>
+              <li>PRINTED T-SHIRTS</li>
             </ul>
           </div>
         </li>
         <li>
-          <div className="main-cat-name">ZINWOOS TIME</div>
-          <div className="sub-cat">
+          <div className="main-cat-name border-none">ZINWOOS TIME</div>
+          <div className="sub-cat third-sub-cat">
             <ul>
-              <li>시간은</li>
-              <li>금이야</li>
-              <li>후루룩</li>
+              <li>TIME</li>
             </ul>
           </div>
         </li>

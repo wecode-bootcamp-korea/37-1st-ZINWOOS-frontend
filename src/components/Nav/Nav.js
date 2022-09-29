@@ -29,7 +29,7 @@ const Nav = () => {
         <div className="nav-logo">
           <Link to="/">
             <img
-              src="https://github.com/ChoiRamsey/zinwoos/blob/main/LOGO_ZINWOOS.png?raw=true"
+              src="https://github.com/ChoiRamsey/zinwoos/blob/main/LOGO_ZINWOOS(%E1%84%89%E1%85%AE%E1%84%8C%E1%85%A5%E1%86%BC).png?raw=true"
               alt="ZINWOOS"
             />
           </Link>

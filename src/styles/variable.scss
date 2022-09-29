@@ -18,10 +18,6 @@ $font-medium: 22px;
 $font-small: 18px;
 $font-micro: 13px;
 
-$font-large: 48px;
-$font-medium: 22px;
-$font-small: 18px;
-$font-micro: 13px;
 @mixin flexSort($justify, $alignItems) {
   display: flex;
   justify-content: $justify;

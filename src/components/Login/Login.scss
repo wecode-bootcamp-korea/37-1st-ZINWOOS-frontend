@@ -26,8 +26,10 @@
         width: 30px;
         height: 30px;
         margin-bottom: 20px;
-        border-radius: 50%;
+        background-color: transparent;
+        font-style: none;
         font-size: 20px;
+        border: none;
 
         &:hover {
           cursor: pointer;
@@ -35,16 +37,14 @@
       }
     }
 
-    h1 {
+    .login-logo {
       margin-bottom: 20px;
-      font-size: 40px;
-      font-weight: 800;
-      color: blue;
     }
 
     p {
-      margin-bottom: 20px;
-      font-size: 20px;
+      margin-bottom: 40px;
+      font-size: $font-small;
+      font-weight: 300;
     }
 
     form {
@@ -53,26 +53,46 @@
       .input-container {
         width: 100%;
         height: 250px;
+        margin-bottom: 20px;
 
         input {
-          width: 80%;
-          margin-bottom: 20px;
-          padding: 5px;
-          border-radius: 5px;
+          width: 330px;
+          height: 40px;
+          margin-bottom: 10px;
+          padding: 5px 10px;
+          border-radius: 4px;
+          font-size: 15px;
+          border-color: $grey-dark-color;
+
+          &:focus {
+            background-color: transparent;
+            outline-color: orange;
+          }
         }
       }
 
       button {
         width: 200px;
+        margin-top: 20px;
         margin-bottom: 20px;
         padding: 10px;
+        font-size: $font-small;
+        background-color: $green-dark-color;
+        color: $white-color;
+        border: none;
+
+        &:disabled {
+          background-color: $grey-color;
+          color: $white-color;
+        }
       }
     }
 
     .change-input-type {
-      color: blue;
+      color: $green-dark-color;
 
       &:hover {
+        color: orange;
         cursor: pointer;
       }
     }
