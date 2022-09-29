@@ -1,3 +1,5 @@
+@import '../../styles/variable.scss';
+
 .ProductList {
   padding-top: 60px;
   color: black;
@@ -45,14 +47,19 @@
     margin: 0 -20px;
   }
 
-  li {
-    float: left;
-    margin-left: 10px;
-  }
-
   .move-btn-wrapper {
     display: flex;
     justify-content: center;
     margin: 50px 0 50px 0;
+  }
+
+  .sort-btn {
+    color: $grey-dark-color;
+    background-color: $white-color;
+    border-style: none;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

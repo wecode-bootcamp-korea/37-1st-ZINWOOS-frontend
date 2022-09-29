@@ -36,7 +36,7 @@ const Nav = () => {
         </div>
         <div className="nav-menu">
           <div>BRAND</div>
-          <Link to="/product_list">
+          <Link to="/product_list/all/0">
             <div onMouseOver={onMouseOver}>SHOP</div>
           </Link>
           <div>GALLERY</div>

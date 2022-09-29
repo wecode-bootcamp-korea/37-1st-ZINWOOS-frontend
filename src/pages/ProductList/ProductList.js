@@ -6,19 +6,49 @@ import ProductImage from './component/Product/ProductImage';
 
 const ProductList = () => {
   const [product, setProduct] = useState([]);
-  const [nameorder, setNameOrder] = useState('ASC');
+  const [order, setOrder] = useState(true);
+  const [sort, setSort] = useState('items_name');
   const params = useParams();
   const mainId = params;
 
   useEffect(() => {
-    fetch(
-      `http://172.20.10.5:3000/posts/${mainId.id}?idx=${mainId.id2}&sort=items.name&order=${nameorder}&limit=100&offset=0`
-    )
-      .then(res => res.json())
-      .then(data => {
-        setProduct(data.data);
-      });
-  }, [mainId]);
+    if (Number(mainId.id2) !== 0) {
+      fetch(
+        `http://172.20.10.5:3000/posts/${mainId.id}?${
+          mainId.id2
+        }&sort=${sort}&order=${order ? 'ASC' : 'DESC'}&limit=100&offset=0`
+      )
+        .then(res => res.json())
+        .then(data => {
+          setProduct(data.data);
+        });
+    } else {
+      fetch(
+        `http://172.20.10.5:3000/posts/${mainId.id}?sort=${sort}&order=${
+          order ? 'ASC' : 'DESC'
+        }&limit=100&offset=0`
+      )
+        .then(res => res.json())
+        .then(data => {
+          setProduct(data.data);
+        });
+    }
+  }, [mainId, order]);
+
+  const nameSortHandler = () => {
+    setSort('items_name');
+    setOrder(!order);
+  };
+
+  const priceSortHandler = () => {
+    setSort('price');
+    setOrder(!order);
+  };
+
+  const likesSortHandler = () => {
+    setSort('likes');
+    setOrder(!order);
+  };
 
   return (
     <div className="ProductList">
@@ -30,8 +60,17 @@ const ProductList = () => {
             <div className="product-move" />
             <div className="product-sort">
               <div className="sort">
-                <Link to="#">이름순</Link> &nbsp;&nbsp;
-                <Link to="#">신상품순</Link>
+                <button className="sort-btn" onClick={nameSortHandler}>
+                  이름순
+                </button>
+                &nbsp;&nbsp;
+                <button className="sort-btn" onClick={priceSortHandler}>
+                  가격순
+                </button>
+                &nbsp;&nbsp;
+                <button className="sort-btn" onClick={likesSortHandler}>
+                  인기순
+                </button>
               </div>
             </div>
           </div>
