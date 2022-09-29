@@ -16,13 +16,13 @@ const SubNav = ({ main_category_name, sub_category_name }) => {
       >
         <div className="fixed-link">{main_category_name}</div>
         <form className="active-links">
-          <Link to="/product_list/1">
+          <Link to="/product_list/main/main_category_id=1">
             <div className="active-link">ZINWOOS Item</div>
           </Link>
-          <Link to="/product_list/2">
+          <Link to="/product_list/main/main_category_id=2">
             <div className="active-link">ZINWOOS Goods</div>
           </Link>
-          <Link to="/product_list/3">
+          <Link to="/product_list/main/main_category_id=3">
             <div className="active-link">ZINWOOS Time</div>
           </Link>
         </form>
