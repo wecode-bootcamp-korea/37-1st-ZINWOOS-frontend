@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SubNav.scss';
+
 const SubNav = ({ main_category_name, sub_category_name }) => {
   const [navOpen, setNavOpen] = useState(true);
 
@@ -12,11 +14,17 @@ const SubNav = ({ main_category_name, sub_category_name }) => {
         onMouseLeave={() => setNavOpen(!navOpen)}
         className={!navOpen ? 'nav-link active' : 'nav-link'}
       >
-        <button className="fixed-link">{main_category_name}</button>
+        <div className="fixed-link">{main_category_name}</div>
         <form className="active-links">
-          <button className="active-link">ZINWOOS Time</button>
-          <button className="active-link">ZINWOOS Goods</button>
-          <button className="active-link">ZINWOOS Item</button>
+          <Link to="/product_list/1">
+            <div className="active-link">ZINWOOS Item</div>
+          </Link>
+          <Link to="/product_list/2">
+            <div className="active-link">ZINWOOS Goods</div>
+          </Link>
+          <Link to="/product_list/3">
+            <div className="active-link">ZINWOOS Time</div>
+          </Link>
         </form>
       </div>
       <span>/ {sub_category_name}</span>
