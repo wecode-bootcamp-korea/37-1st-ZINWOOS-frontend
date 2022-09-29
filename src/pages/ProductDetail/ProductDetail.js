@@ -23,13 +23,12 @@ const ProductDetail = () => {
   const [optionPrice, setOptionPrice] = useState(0);
   const [optionId, setOptionId] = useState(null);
   useEffect(() => {
-    fetch('/data/item.json')
+    fetch(`http://172.20.10.3:3000/items/${productId}`)
       .then(response => response.json())
       .then(result => {
         setProduct(result.data[0]);
       });
   }, [productId]);
-
   // `http://172.20.10.3:3000/items/${productId}`;
 
   const optionHandler = e => {
