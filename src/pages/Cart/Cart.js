@@ -11,23 +11,23 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch('http://172.20.10.3:3000/carts?limit=50&offset=0', {
-      headers: { Authorization: localStorage.getItem('token') },
-    })
-      .then(response => response.json())
-      .then(data => {
-        setCartList(data.cartList);
-      });
-  }, []);
-  //위는 백엔드 API 통신 && 아래는 목데이터 사용 테스트용
   // useEffect(() => {
-  //   fetch('/data/cart.json', {
+  //   fetch('http://172.20.10.3:3000/carts?limit=50&offset=0', {
   //     headers: { Authorization: localStorage.getItem('token') },
   //   })
   //     .then(response => response.json())
-  //     .then(data => setCartList(data.cartList));
+  //     .then(data => {
+  //       setCartList(data.cartList);
+  //     });
   // }, []);
+  //위는 백엔드 API 통신 && 아래는 목데이터 사용 테스트용
+  useEffect(() => {
+    fetch('/data/cart.json', {
+      headers: { Authorization: localStorage.getItem('token') },
+    })
+      .then(response => response.json())
+      .then(data => setCartList(data.cartList));
+  }, []);
 
   useEffect(() => {
     const copy = [...cartList];
@@ -44,22 +44,10 @@ const Cart = () => {
   }, [cartList]);
 
   const submitOrder = async () => {
-    const cartId = cartList
-      .filter(item => item.checkbox === 1)
-      .map(item => {
-        return item.id;
-      });
-    const itemId = cartList
-      .filter(item => item.checkbox === 1)
-      .map(item => {
-        return item.itemId;
-      });
-    const quantity = cartList
-      .filter(item => item.checkbox === 1)
-      .map(item => {
-        return item.quantity;
-      });
-    console.log(cartId, itemId, quantity);
+    const orderList = cartList.filter(item => item.checkbox === 1);
+
+    //체크된 객체들만 모으는 배열만들어야 함.
+    console.log(orderList);
     const response = await fetch(`http://172.20.10.3:3000/orders`, {
       method: 'POST',
       headers: {
@@ -67,9 +55,7 @@ const Cart = () => {
         Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        cartId: cartId,
-        itemId: itemId,
-        quantity: quantity,
+        orderList: orderList,
       }),
     });
 

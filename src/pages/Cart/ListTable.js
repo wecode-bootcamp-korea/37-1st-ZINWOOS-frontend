@@ -87,7 +87,7 @@ const ListTable = ({ cartList, setCartList }) => {
     }
   }
 
-  const setQuantitiy = event => {
+  const setQuantitiy = async event => {
     const findIndex = cartList.findIndex(
       e => (e.itemId + e.option_name).toString() === event.target.name
     );
@@ -97,6 +97,19 @@ const ListTable = ({ cartList, setCartList }) => {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity + 1,
       };
+      console.log(copy[findIndex].cartId);
+      // 쿼리스트링에 해당 카트아이디 실어주기? ?
+      const response = await fetch('#', {
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('token'),
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          cartId: copy[findIndex].cartId,
+        }),
+      });
+      console.log(response.status);
     } else if (
       findIndex > -1 &&
       event.target.innerHTML === '-' &&
