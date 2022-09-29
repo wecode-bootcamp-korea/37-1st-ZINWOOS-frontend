@@ -50,9 +50,16 @@ const ProductList = () => {
     setOrder(!order);
   };
 
+  const isData = product.length !== 0;
+
+  if (!isData) return <>loading...</>;
+
   return (
     <div className="ProductList">
-      <MainImage product={product[0]} key={product.items_id} />
+      <MainImage
+        mainTitle={product[0].main_cate_name}
+        mainText={product[0].main_description}
+      />
       <div id="tag" />
       <div className="contents">
         <div className="contents-wrapper">
