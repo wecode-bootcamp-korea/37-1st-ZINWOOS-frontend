@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import LikeItem from './components/LikeItem';
 import LikeNull from './components/LikeNull';
 import './Likes.scss';
 
 const Likes = () => {
   const [likeList, setLikeList] = useState([]);
+  const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    fetch('/data/likeData.json', {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
-      },
-    })
-      .then(res => res.json())
-      .then(result => setLikeList(result.data));
-  }, []);
+  useEffect(
+    () => {
+      fetch('http://172.20.10.5:3000/likes', {
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: token,
+        },
+      })
+        .then(res => res.json())
+        .then(result => setLikeList(result.data));
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   // 삭제 버튼
   const deleteBtn = async id => {
@@ -25,8 +28,7 @@ const Likes = () => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
+        Authorization: token,
       },
     });
 
@@ -34,8 +36,7 @@ const Likes = () => {
       alert('관심상품에서 삭제했습니다');
       fetch(`http://172.20.10.5:3000/likes/`, {
         headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjcyNjY0LCJleHAiOjE2NjUwNTAyNjR9.Z8MgO6TAj5_DekBvSv8Fz7vWN3qYU0qNZRerBRVPq2U',
+          Authorization: token,
         },
       })
         .then(res => res.json())
@@ -57,12 +58,12 @@ const Likes = () => {
         ) : (
           likeList.map(product => {
             return (
-              <Link
+              <LikeItem
                 key={product.item_id}
-                to={`/product_detail/${product.item_id}`}
-              >
-                <LikeItem likeData={product} deleteBtn={deleteBtn} />
-              </Link>
+                likeData={product}
+                deleteBtn={deleteBtn}
+                linkItemId={product.item_id}
+              />
             );
           })
         )}
