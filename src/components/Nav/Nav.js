@@ -52,7 +52,7 @@ const Nav = () => {
               Login & SignUp
             </div>
           )}
-          <Link to="#">
+          <Link to="/likes">
             <div className="nav-right-tab">관심상품</div>
           </Link>
           <Link to="#">
