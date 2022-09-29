@@ -35,7 +35,7 @@ const ListTable = ({ cartList, setCartList }) => {
   };
   const handleCheckbox = event => {
     const findIndex = cartList.findIndex(
-      e => String(e.id + e.option_name) === event.target.name
+      e => String(e.itemId + e.option_name) === event.target.name
     );
 
     let copy = [...cartList];
@@ -61,7 +61,7 @@ const ListTable = ({ cartList, setCartList }) => {
         return ele.checkbox === 1;
       })
       .map(item => {
-        return item.id;
+        return item.itemId;
       });
     const response = await fetch(
       `http://172.20.10.5:3000/carts?cartId=${deleteItemId.join('&cartId=')}`,
@@ -78,7 +78,7 @@ const ListTable = ({ cartList, setCartList }) => {
 
     if (data.message === 'DELETE_SUCCESS') {
       const response = await fetch(
-        'http://172.20.10.5:3000/carts?limit=50&offset=0',
+        'http://172.20.10.3:3000/carts?limit=50&offset=0',
         { headers: { Authorization: localStorage.getItem('token') } }
       );
       const data = await response.json();
@@ -89,8 +89,8 @@ const ListTable = ({ cartList, setCartList }) => {
 
   const setQuantitiy = event => {
     const findIndex = cartList.findIndex(
-      e => (e.id + e.option_name).toString() === event.target.name
-    ); //
+      e => (e.itemId + e.option_name).toString() === event.target.name
+    );
     let copy = [...cartList];
     if (findIndex > -1 && event.target.innerHTML === '+') {
       copy[findIndex] = {
@@ -113,7 +113,7 @@ const ListTable = ({ cartList, setCartList }) => {
 
   const handleInput = event => {
     const findIndex = cartList.findIndex(
-      e => String(e.id + e.option_name) === event.target.name
+      e => String(e.itemId + e.option_name) === event.target.name
     );
     let copy = [...cartList];
     if (findIndex !== -1) {
@@ -149,7 +149,7 @@ const ListTable = ({ cartList, setCartList }) => {
         <tbody>
           {cartList?.map((item, i) => {
             const {
-              id,
+              itemId,
               name,
               option_name,
               quantity,
@@ -158,10 +158,10 @@ const ListTable = ({ cartList, setCartList }) => {
               detail_image,
             } = item;
             return (
-              <tr key={id + option_name} className="cart-item">
+              <tr key={itemId + option_name} className="cart-item">
                 <td>
                   <input
-                    name={id + option_name}
+                    name={itemId + option_name}
                     className="checkbox"
                     type="checkbox"
                     checked={checkbox}
@@ -181,21 +181,21 @@ const ListTable = ({ cartList, setCartList }) => {
                 </td>
                 <td>
                   <button
-                    name={id + option_name}
+                    name={itemId + option_name}
                     onClick={setQuantitiy}
                     className="count-btn"
                   >
                     -
                   </button>
                   <input
-                    name={id + option_name}
+                    name={itemId + option_name}
                     className="number-box"
                     type="number"
                     value={quantity}
                     onChange={handleInput}
                   />
                   <button
-                    name={id + option_name}
+                    name={itemId + option_name}
                     onClick={setQuantitiy}
                     className="count-btn"
                   >

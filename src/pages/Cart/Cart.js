@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ListTable from './ListTable';
 
 import './Cart.scss';
@@ -9,12 +9,16 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipFee, setShipFee] = useState(3000);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch('http://172.20.10.5:3000/carts?limit=50&offset=0', {
+    fetch('http://172.20.10.3:3000/carts?limit=50&offset=0', {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(response => response.json())
-      .then(data => setCartList(data.cartList));
+      .then(data => {
+        setCartList(data.cartList);
+      });
   }, []);
   //위는 백엔드 API 통신 && 아래는 목데이터 사용 테스트용
   // useEffect(() => {
@@ -40,26 +44,38 @@ const Cart = () => {
   }, [cartList]);
 
   const submitOrder = async () => {
-    const orderList = cartList
+    const cartId = cartList
       .filter(item => item.checkbox === 1)
       .map(item => {
         return item.id;
       });
-    const response = await fetch(
-      `http://172.20.10.5:3000/orders?cartId=${orderList.join('&cartId=')}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          Authorization: localStorage.getItem('token'),
-        },
-      }
-    );
-    const data = await response.json();
-    if (response.status === 201) {
+    const itemId = cartList
+      .filter(item => item.checkbox === 1)
+      .map(item => {
+        return item.itemId;
+      });
+    const quantity = cartList
+      .filter(item => item.checkbox === 1)
+      .map(item => {
+        return item.quantity;
+      });
+    console.log(cartId, itemId, quantity);
+    const response = await fetch(`http://172.20.10.3:3000/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        cartId: cartId,
+        itemId: itemId,
+        quantity: quantity,
+      }),
+    });
+
+    if (response.status === 200) {
       alert('주문성공');
-      alert(data);
-      // 메인페이지로 이동
+      navigate('/');
     }
   };
 
