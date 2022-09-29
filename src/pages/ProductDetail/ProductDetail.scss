@@ -3,7 +3,7 @@
 .ProductDetail {
   @include flexSort(flex-start, center);
   flex-direction: column;
-  padding: calc($padding * 3);
+  padding: calc($padding * 3) calc($padding * 3) 150px calc($padding * 3);
   background-color: $green-light-color;
 
   .product-wrap {
@@ -11,6 +11,7 @@
     padding: calc($padding * 4) calc($padding * 2) 0 calc($padding * 2);
     margin-top: calc($padding * 8);
     background-color: $white-color;
+    border-radius: 3px;
   }
 
   .product {
@@ -22,11 +23,6 @@
 
       &-contents {
         padding: 0 0 0 calc($padding * 2);
-
-        // button,
-        // input {
-        //   border-style: none;
-        // }
 
         &-title {
           color: $green-dark-color;
