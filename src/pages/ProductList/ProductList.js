@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './ProductList.scss';
 import MainImage from './component/MainImage/MainImage';
 import ProductImage from './component/Product/ProductImage';
@@ -33,7 +33,7 @@ const ProductList = () => {
           setProduct(data.data);
         });
     }
-  }, [mainId, order]);
+  }, [mainId, order, sort]);
 
   const nameSortHandler = () => {
     setSort('items_name');
@@ -52,7 +52,7 @@ const ProductList = () => {
 
   return (
     <div className="ProductList">
-      <MainImage />
+      <MainImage product={product[0]} key={product.items_id} />
       <div id="tag" />
       <div className="contents">
         <div className="contents-wrapper">

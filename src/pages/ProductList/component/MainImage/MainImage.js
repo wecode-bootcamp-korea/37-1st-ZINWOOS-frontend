@@ -11,9 +11,9 @@ const MainImage = () => {
       />
       <div className="main-header">
         <div>
-          <p className="header-name">Items</p>
+          <p className="header-name">12</p>
         </div>
-        <div className="second-header">진우님의 체취가 가득한</div>
+        <div className="second-header">34</div>
         <div>
           <a href="#tag" className="scroll-move">
             제품 바로보기
