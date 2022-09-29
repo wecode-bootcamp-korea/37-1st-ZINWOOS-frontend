@@ -3,34 +3,33 @@
 
 .Footer {
   width: 100%;
-  height: 450px;
-  padding: 80px;
+  height: 400px;
+  padding-top: 70px;
   background-color: $green-dark-color;
 
   .footer-container {
     @include flexSort(center, '');
+
     .footer-data-policy {
-      min-width: 1130px;
-      max-width: 1130px;
+      min-width: 1000px;
+      max-width: 1000px;
 
       .footer-logo {
-        margin-right: 50px;
-        color: $white-color;
-        font-family: Gugi;
-        font-size: $font-medium;
+        width: 120px;
+        margin-right: 20px;
       }
 
       .footer-data {
-        padding: 0 20px;
+        padding: 0 15px;
         color: $white-color;
         text-decoration: none;
-        font-size: calc($font-medium - 3px);
+        font-size: $font-small;
       }
     }
 
     .policy-wrap {
       display: inline-block;
-      margin-top: 50px;
+      margin-top: 70px;
 
       .footer-policy {
         color: $white-color;
@@ -42,7 +41,7 @@
         }
 
         span {
-          padding: 0 12px;
+          padding: 0 15px;
           border-right: 1px solid $white-color;
           font-size: $font-small;
           font-weight: 100;
@@ -59,15 +58,16 @@
     }
 
     .customer-center {
-      min-width: 230px;
+      min-width: 200px;
+      margin-left: 20px;
       color: $white-color;
       font-size: $font-medium;
 
       .customer-center-title {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
       .customer-center-number {
-        margin-bottom: 10px;
+        margin-bottom: 25px;
         font-size: calc($font-medium * 1.5);
       }
 
@@ -82,9 +82,9 @@
 
         .insta-logo,
         .youtube-logo {
-          width: 60px;
-          height: 60px;
-          margin-top: 30px;
+          width: 50px;
+          height: 50px;
+          margin-top: 20px;
           margin-right: 10px;
           border-radius: 50%;
           background-color: $white-color;
@@ -93,7 +93,7 @@
           i {
             display: flex;
             justify-content: center;
-            line-height: 60px;
+            line-height: 50px;
             color: $green-dark-color;
             font-size: calc($font-medium * 1.2);
           }

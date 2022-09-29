@@ -7,7 +7,13 @@ const Footer = () => {
     <section className="Footer">
       <div className="footer-container">
         <div className="footer-data-policy">
-          <span className="footer-logo">ZINWOOS</span>
+          <span className="footer-logo-wrap">
+            <img
+              src="https://github.com/ChoiRamsey/zinwoos/blob/main/LOGO_ZINWOOS(white).png?raw=true"
+              className="footer-logo"
+              alt="zinwooslogo"
+            />
+          </span>
 
           {FOOTER_DATA.map(data => (
             <Link to="" key={data.id} className="footer-data">
@@ -17,17 +23,17 @@ const Footer = () => {
 
           <div className="policy-wrap">
             <p className="footer-policy">
-              <span>상호명 : (주)지누스</span>
+              <span>상호명 : (주)ZINWOOS</span>
               <span>대표 : 이가을</span>
-              <span>메일 : galee1025@gmail.com</span>
+              <span>메일 : zinwoos@gmail.com</span>
             </p>
             <p className="footer-policy">
               <span>전화 : 031 - 273 - 4442</span>
               <span>팩스 : 031 - 273 - 5444</span>
-              <span>주소 : 서울특별시 강남구 테헤란로 427 위워크</span>
+              <span>주소 : 서울특별시 강남구 테헤란로 427</span>
             </p>
             <p className="footer-policy">
-              <span>개인정보관리자 : 정인호</span>
+              <span>개인정보관리자 : 김성식 / 정인호 / 최진우</span>
               <span>통신판매업신고번호 : 2022-서울-0920</span>
               <span>© ZINWOOS</span>
             </p>
@@ -63,7 +69,7 @@ export default Footer;
 const FOOTER_DATA = [
   {
     id: 'footer01',
-    text: 'ZINUS USA',
+    text: 'ZIN USA',
     url: '',
   },
   {
