@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import LikeItem from './components/LikeItem';
 import LikeNull from './components/LikeNull';
 import './Likes.scss';
@@ -56,11 +57,12 @@ const Likes = () => {
         ) : (
           likeList.map(product => {
             return (
-              <LikeItem
+              <Link
                 key={product.item_id}
-                likeData={product}
-                deleteBtn={deleteBtn}
-              />
+                to={`/product_detail/${product.item_id}`}
+              >
+                <LikeItem likeData={product} deleteBtn={deleteBtn} />
+              </Link>
             );
           })
         )}
