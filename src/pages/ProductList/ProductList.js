@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import './ProductList.scss';
 import MainImage from './component/MainImage/MainImage';
 import ProductImage from './component/Product/ProductImage';
-import SubNav from '../../components/SubNav/SubNav';
-import Button from './component/Button/Button';
 
 const ProductList = () => {
   const [product, setProduct] = useState([]);
-
+  const params = useParams();
+  const mainId = params;
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const offset = 0;
+  // const limit = 12;
+  // console.log(mainId);
   useEffect(() => {
-    // fetch('http://172.20.10.5:3000/posts/price?idx=2&limit=100&offset=0')
-    fetch('./Mock/Mock.json')
+    fetch(
+      `http://172.20.10.5:3000/posts/${mainId.id}?idx=${mainId.id2}&sort=items.name&order=ASC&limit=100&offset=0`
+    )
+      // fetch('./Mock/Mock.json')
       .then(res => res.json())
       .then(data => {
-        setProduct(data);
+        // console.log(data.data);
+        setProduct(data.data);
       });
-  }, []);
+  }, [mainId]);
+
+  // const movePage = pageNumber => {
+  //   searchParams.set('offset', (pageNumber - 1) * 12);
+  //   setSearchParams(searchParams);
+  // };
 
   return (
     <div className="ProductList">
@@ -24,15 +36,12 @@ const ProductList = () => {
       <div className="contents">
         <div className="contents-wrapper">
           <div className="move-solt">
-            <div className="product-move">
-              <SubNav />
-            </div>
+            <div className="product-move" />
             <div className="product-sort">
-              <ul className="sort">
-                <li>이름순</li>
-                <li>신상품순</li>
-                <li>가격순</li>
-              </ul>
+              <div className="sort">
+                <Link to="#">이름순</Link> &nbsp;&nbsp;
+                <Link to="#">신상품순</Link>
+              </div>
             </div>
           </div>
           <div className="product-content">
@@ -44,7 +53,7 @@ const ProductList = () => {
           </div>
           <div className="move-btn-wrapper">
             <div className="move-btn">
-              <Button />
+              <div className="Button" />
             </div>
           </div>
         </div>
