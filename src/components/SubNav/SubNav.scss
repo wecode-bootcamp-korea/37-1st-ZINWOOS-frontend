@@ -9,6 +9,7 @@
   .nav-link {
     position: relative;
     width: 130px;
+    text-align: center;
 
     .fixed-link {
       width: 100%;
@@ -20,6 +21,7 @@
 
     .active-link {
       display: none;
+      text-decoration: none;
     }
 
     &.active {
@@ -27,10 +29,14 @@
         position: absolute;
         display: block;
 
+        a {
+          text-decoration: none;
+        }
+
         .active-link {
           display: flex;
           width: 100%;
-          margin-left: $padding;
+          margin-left: calc($padding/2);
           padding: calc($padding/2);
           color: $grey-dark-color;
           background-color: $white-color;
