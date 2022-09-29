@@ -20,8 +20,7 @@ const PriceCalculator = ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjY0MTc5Mzg2LCJleHAiOjE2NjQ5NTY5ODZ9.C8WWs5-EhQTk7Dx1IIt_152J5IDTmCrZ8dvJdlcCsJk',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         itemId: productId,
@@ -37,13 +36,11 @@ const PriceCalculator = ({
   const addWishList = e => {
     e.preventDefault();
     setWishList(!wishList);
-    // setHeartColor('fa-solid fa-heart');
     fetch('http://172.20.10.3:3000/likes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjY0MjU5MTI2LCJleHAiOjE2NjUwMzY3MjZ9.nzeCZZfKgrppkCSwhrG-ASA2Mat800uRlWjIYYmGz2c',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         itemId: productId,
@@ -53,6 +50,14 @@ const PriceCalculator = ({
         alert('위시리스트에 추가되었습니다!');
       }
     });
+  };
+
+  const minusQuantity = () => {
+    setQuantity(quantity > 1 ? quantity - 1 : 1);
+  };
+
+  const plusQuantity = () => {
+    setQuantity(quantity < max_amount ? quantity + 1 : quantity);
   };
 
   return (
@@ -65,21 +70,11 @@ const PriceCalculator = ({
         </select>
       </div>
       <div className="quantity">
-        <button
-          className="quantity-button"
-          onClick={() => {
-            setQuantity(quantity > 1 ? quantity - 1 : 1);
-          }}
-        >
+        <button className="quantity-button" onClick={minusQuantity}>
           <i className="fa-solid fa-minus" />
         </button>
         <input className="quantity-input" value={quantity} type="number" />
-        <button
-          className="quantity-button"
-          onClick={() => {
-            setQuantity(quantity < max_amount ? quantity + 1 : quantity);
-          }}
-        >
+        <button className="quantity-button" onClick={plusQuantity}>
           <i className="fa-solid fa-plus" />
         </button>
       </div>

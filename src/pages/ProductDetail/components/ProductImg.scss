@@ -3,6 +3,7 @@
 .product-img-container {
   width: 500px;
   height: 500px;
+  border-radius: 3px;
   overflow: hidden;
 
   .product-img {
@@ -18,6 +19,7 @@
     width: 100px;
     height: 100px;
     margin-right: 10px;
+    border-radius: 3px;
     opacity: 0.5;
     overflow: hidden;
 
