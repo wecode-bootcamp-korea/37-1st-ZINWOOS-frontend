@@ -97,19 +97,20 @@ const ListTable = ({ cartList, setCartList }) => {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity + 1,
       };
-      console.log(copy[findIndex].cartId);
-      // 쿼리스트링에 해당 카트아이디 실어주기? ?
-      const response = await fetch('#', {
+
+      const response = await fetch('http://172.20.10.3:3000/carts/plus', {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: localStorage.getItem('token'),
         },
-        method: 'POST',
+        method: 'PATCH',
         body: JSON.stringify({
           cartId: copy[findIndex].cartId,
         }),
       });
-      console.log(response.status);
+      if (response.status !== 204) {
+        alert('서버와의 통신이 원활하지 않습니다.');
+      }
     } else if (
       findIndex > -1 &&
       event.target.innerHTML === '-' &&
@@ -119,6 +120,19 @@ const ListTable = ({ cartList, setCartList }) => {
         ...cartList[findIndex],
         quantity: cartList[findIndex].quantity - 1,
       };
+      const response = await fetch('http://172.20.10.3:3000/carts/minus', {
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('token'),
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
+          cartId: copy[findIndex].cartId,
+        }),
+      });
+      if (response.status !== 204) {
+        alert('서버와의 통신이 원활하지 않습니다.');
+      }
     }
 
     setCartList(copy);
