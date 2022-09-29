@@ -14,42 +14,51 @@ const PriceCalculator = ({
   const [quantity, setQuantity] = useState(1);
   const totalPrice = (price * 1 + optionPrice * 1) * quantity;
   const [wishList, setWishList] = useState(false);
+  const token = localStorage.getItem('token');
 
   const addCartHandler = () => {
-    fetch('http://172.20.10.5:3000/carts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        itemId: productId,
-        optionId: optionId,
-        quantity: quantity,
-      }),
-    }).then(result => {
-      if (result.status === 201) {
-        alert('장바구니에 상품이 담겼습니다!');
-      }
-    });
+    if (token) {
+      fetch('http://172.20.10.3:3000/carts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          itemId: productId,
+          optionId: optionId,
+          quantity: quantity,
+        }),
+      }).then(result => {
+        if (result.status === 201) {
+          alert('장바구니에 상품이 담겼습니다!');
+        }
+      });
+    } else {
+      alert('로그인 후 장바구니에 담아주세요!');
+    }
   };
   const addWishList = e => {
     e.preventDefault();
-    setWishList(!wishList);
-    fetch('http://172.20.10.3:3000/likes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        itemId: productId,
-      }),
-    }).then(response => {
-      if (response.status === 201) {
-        alert('위시리스트에 추가되었습니다!');
-      }
-    });
+    if (token) {
+      setWishList(!wishList);
+      fetch('http://172.20.10.3:3000/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          itemId: productId,
+        }),
+      }).then(response => {
+        if (response.status === 201) {
+          alert('관심상품에 추가되었습니다!');
+        }
+      });
+    } else {
+      alert('로그인 후 관심상품 등록이 가능합니다!');
+    }
   };
 
   const minusQuantity = () => {
