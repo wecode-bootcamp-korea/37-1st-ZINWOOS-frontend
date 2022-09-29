@@ -18,7 +18,7 @@ const PriceCalculator = ({
 
   const addCartHandler = () => {
     if (token) {
-      fetch('http://172.20.10.3:3000/carts', {
+      fetch('http://3.38.97.125:3000/carts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -42,7 +42,7 @@ const PriceCalculator = ({
     e.preventDefault();
     if (token) {
       setWishList(!wishList);
-      fetch('http://172.20.10.3:3000/likes', {
+      fetch('http://3.38.97.125:3000/likes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

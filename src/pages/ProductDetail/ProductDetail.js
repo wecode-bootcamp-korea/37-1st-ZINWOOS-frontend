@@ -19,18 +19,19 @@ const ProductDetail = () => {
     option_name,
     main_category_name,
     sub_category_name,
+    max_amount,
   } = product;
   const [optionPrice, setOptionPrice] = useState(0);
   const [optionId, setOptionId] = useState(null);
   useEffect(() => {
-    fetch(`http://172.20.10.3:3000/items/${productId}`)
+    fetch(`http://3.38.97.125:3000/items/${productId}`)
       .then(response => response.json())
       .then(result => {
         setProduct(result.data[0]);
       });
   }, [productId]);
-  // `http://172.20.10.3:3000/items/${productId}`;
 
+  // `http://3.38.97.125:3000/items/${productId}`
   const optionHandler = e => {
     if (e.target.value) {
       setOptionPrice(option_price);
@@ -58,7 +59,7 @@ const ProductDetail = () => {
                 <li>택배배송</li>
                 <li>
                   <span>3,000원</span>
-                  <span>(주문시 결제)</span>9
+                  <span>(주문시 결제)</span>
                 </li>
                 <li>100,000원 이상 구매시 무료 / 제주,도서지역 추가 3,000원</li>
               </ul>
@@ -69,6 +70,7 @@ const ProductDetail = () => {
                 option_name={option_name}
                 optionHandler={optionHandler}
                 optionPrice={optionPrice}
+                max_amount={max_amount}
               />
             </div>
           </article>
