@@ -31,7 +31,6 @@ const ProductDetail = () => {
       });
   }, [productId]);
 
-  // `http://3.38.97.125:3000/items/${productId}`
   const optionHandler = e => {
     if (e.target.value) {
       setOptionPrice(option_price);
