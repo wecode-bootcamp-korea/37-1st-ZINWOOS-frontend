@@ -9,7 +9,7 @@ const Likes = () => {
 
   useEffect(
     () => {
-      fetch('http://3.38.97.125:3000/likes', {
+      fetch('http://172.20.10.3:3000/likes', {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: token,
@@ -24,7 +24,7 @@ const Likes = () => {
 
   // 삭제 버튼
   const deleteBtn = async id => {
-    const response = await fetch(`http://3.38.97.125:3000/likes/${id}`, {
+    const response = await fetch(`http://172.20.10.3:3000/likes/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -34,7 +34,7 @@ const Likes = () => {
 
     if (response.status === 204) {
       alert('관심상품에서 삭제했습니다');
-      fetch(`http://3.38.97.125:3000/likes/`, {
+      fetch(`http://172.20.10.3:3000/likes/`, {
         headers: {
           Authorization: token,
         },

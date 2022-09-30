@@ -9,7 +9,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipFee, setShipFee] = useState(3000);
   useEffect(() => {
-    fetch('http://3.38.97.125:3000/carts?limit=50&offset=0', {
+    fetch('http://172.20.10.3:3000/carts?limit=50&offset=0', {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(response => response.json())
@@ -34,7 +34,7 @@ const Cart = () => {
 
   const submitOrder = async () => {
     const orderList = cartList.filter(item => item.checkbox === 1);
-    const response = await fetch(`http://3.38.97.125:3000/orders`, {
+    const response = await fetch(`http://172.20.10.3:3000/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -65,7 +65,7 @@ const Cart = () => {
                   <ul>
                     <li>
                       <div>합계금액</div>
-                      <div>{`${totalPrice.toLocaleString()}원`}</div>
+                      <div>{`${totalPrice.toLocaleString()} 원`}</div>
                     </li>
                     <li>
                       <i className="fa-solid fa-minus" />
