@@ -28,7 +28,7 @@ const Login = ({ modalLogin, setShowLogin }) => {
 
   const handleLogin = e => {
     e.preventDefault();
-    fetch('http://3.38.97.125:3000/users/signin', {
+    fetch('http://172.20.10.3:3000/users/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify({
@@ -51,7 +51,7 @@ const Login = ({ modalLogin, setShowLogin }) => {
 
   const handleSignUp = e => {
     e.preventDefault();
-    fetch('http://3.38.97.125:3000/users/signup', {
+    fetch('http://172.20.10.3:3000/users/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify({
@@ -61,7 +61,10 @@ const Login = ({ modalLogin, setShowLogin }) => {
         phoneNumber: inputValue.phoneNumber,
         address: inputValue.address,
       }),
-    }).then(() => alert('가입성공'));
+    }).then(() => {
+      alert('가입성공');
+      setTypeOfForm('로그인');
+    });
   };
 
   const handleForm = () => {

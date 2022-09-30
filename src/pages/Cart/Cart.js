@@ -9,7 +9,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipFee, setShipFee] = useState(3000);
   useEffect(() => {
-    fetch('http://3.38.97.125:3000/carts?limit=50&offset=0', {
+    fetch('http://172.20.10.3:3000/carts?limit=50&offset=0', {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(response => response.json())
@@ -34,7 +34,7 @@ const Cart = () => {
 
   const submitOrder = async () => {
     const orderList = cartList.filter(item => item.checkbox === 1);
-    const response = await fetch(`http://3.38.97.125:3000/orders`, {
+    const response = await fetch(`http://172.20.10.3:3000/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -47,6 +47,13 @@ const Cart = () => {
 
     if (response.status === 200) {
       alert('주문성공');
+      const response = await fetch('http://172.20.10.3:3000/orders', {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      });
+      // eslint-disable-next-line
+      const data = await response.json();
     }
   };
 
@@ -65,7 +72,7 @@ const Cart = () => {
                   <ul>
                     <li>
                       <div>합계금액</div>
-                      <div>{`${totalPrice.toLocaleString()}원`}</div>
+                      <div>{`${totalPrice.toLocaleString()} 원`}</div>
                     </li>
                     <li>
                       <i className="fa-solid fa-minus" />
@@ -78,7 +85,7 @@ const Cart = () => {
                       {totalPrice === 0 ? (
                         <div>상품을 추가 시 결정</div>
                       ) : (
-                        <div>{totalPrice >= 100000 ? '무료' : 3000}</div>
+                        <div>{totalPrice >= 100000 ? '무료' : '3,000원'}</div>
                       )}
                     </li>
                     <li>
