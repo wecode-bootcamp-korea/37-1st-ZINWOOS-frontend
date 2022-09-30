@@ -47,6 +47,13 @@ const Cart = () => {
 
     if (response.status === 200) {
       alert('주문성공');
+      const response = await fetch('http://172.20.10.3:3000/orders', {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      });
+      // eslint-disable-next-line
+      const data = await response.json();
     }
   };
 
@@ -78,7 +85,7 @@ const Cart = () => {
                       {totalPrice === 0 ? (
                         <div>상품을 추가 시 결정</div>
                       ) : (
-                        <div>{totalPrice >= 100000 ? '무료' : 3000}</div>
+                        <div>{totalPrice >= 100000 ? '무료' : '3,000원'}</div>
                       )}
                     </li>
                     <li>

@@ -61,7 +61,10 @@ const Login = ({ modalLogin, setShowLogin }) => {
         phoneNumber: inputValue.phoneNumber,
         address: inputValue.address,
       }),
-    }).then(() => alert('가입성공'));
+    }).then(() => {
+      alert('가입성공');
+      setTypeOfForm('로그인');
+    });
   };
 
   const handleForm = () => {
